@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://cltoxpka2b0ax"]
+
+[ext_resource type="Texture2D" uid="uid://dujd4nuly466a" path="res://icon.svg" id="1_5bk1q"]
+[ext_resource type="PackedScene" uid="uid://bdc0mx071wmjs" path="res://scenes/player/player.tscn" id="2_wt0fg"]
+[ext_resource type="PackedScene" uid="uid://lvnx54snr8ww" path="res://scenes/levels/island/objects/palm_tree_2.tscn" id="3_wt0fg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fx3a7"]
+size = Vector2(128.401, 126.68)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jwd3g"]
+size = Vector2(128.14, 130.977)
+
+[node name="Stage" type="Node2D"]
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Icon" type="Sprite2D" parent="World"]
+position = Vector2(184, 117)
+scale = Vector2(1.24609, 0.378906)
+texture = ExtResource("1_5bk1q")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World/Icon"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Icon/StaticBody2D"]
+shape = SubResource("RectangleShape2D_fx3a7")
+
+[node name="Icon2" type="Sprite2D" parent="World"]
+position = Vector2(231, 220)
+scale = Vector2(3.58203, 0.167969)
+texture = ExtResource("1_5bk1q")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World/Icon2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Icon2/StaticBody2D"]
+position = Vector2(-0.139587, 0.00012207)
+shape = SubResource("RectangleShape2D_jwd3g")
+
+[node name="Player" parent="." instance=ExtResource("2_wt0fg")]
+position = Vector2(59, 38)
+
+[node name="PalmTree1" parent="." instance=ExtResource("3_wt0fg")]
+position = Vector2(407, 168)

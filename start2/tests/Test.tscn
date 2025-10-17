@@ -1,0 +1,95 @@
+[gd_scene load_steps=9 format=3 uid="uid://cse8m3ao6w5ao"]
+
+[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="1_w3aqi"]
+[ext_resource type="Texture2D" uid="uid://dujd4nuly466a" path="res://icon.svg" id="2_ok4yu"]
+[ext_resource type="PackedScene" uid="uid://bmhud8xs71feb" path="res://levels/objects/palm_tree_1.tscn" id="3_kh2fj"]
+[ext_resource type="PackedScene" uid="uid://dbg8lf7nu20en" path="res://scenes/enemies/pelican/bombardino_crocodilo.tscn" id="4_np4on"]
+[ext_resource type="PackedScene" uid="uid://qflrbh60gpi1" path="res://scenes/enemies/mushroom/amongus.tscn" id="5_n5wxi"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ok4yu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kh2fj"]
+size = Vector2(917, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_np4on"]
+size = Vector2(216, 20)
+
+[node name="Stage" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_w3aqi")]
+position = Vector2(329, 156)
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Icon" type="Sprite2D" parent="World"]
+position = Vector2(422, 256)
+scale = Vector2(7.20313, 0.171875)
+texture = ExtResource("2_ok4yu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World/Icon"]
+position = Vector2(-58.5856, -1489.45)
+scale = Vector2(0.138829, 5.81818)
+physics_material_override = SubResource("PhysicsMaterial_ok4yu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Icon/StaticBody2D"]
+position = Vector2(421.5, 256)
+shape = SubResource("RectangleShape2D_kh2fj")
+
+[node name="Icon2" type="Sprite2D" parent="World"]
+position = Vector2(345.25, 192)
+scale = Vector2(1.70703, 0.171875)
+texture = ExtResource("2_ok4yu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World/Icon2"]
+position = Vector2(-202.252, -1117.09)
+scale = Vector2(0.585813, 5.81818)
+physics_material_override = SubResource("PhysicsMaterial_ok4yu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Icon2/StaticBody2D"]
+position = Vector2(345, 191)
+shape = SubResource("RectangleShape2D_np4on")
+
+[node name="Icon3" type="Sprite2D" parent="World"]
+position = Vector2(-28, 136)
+rotation = -1.57079
+scale = Vector2(1.70703, 0.171875)
+texture = ExtResource("2_ok4yu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World/Icon3"]
+position = Vector2(-202.252, -1117.09)
+scale = Vector2(0.585813, 5.81818)
+physics_material_override = SubResource("PhysicsMaterial_ok4yu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Icon3/StaticBody2D"]
+position = Vector2(345, 191)
+shape = SubResource("RectangleShape2D_np4on")
+
+[node name="Icon4" type="Sprite2D" parent="World"]
+position = Vector2(871, 137)
+rotation = -1.57079
+scale = Vector2(1.70703, 0.171875)
+texture = ExtResource("2_ok4yu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World/Icon4"]
+position = Vector2(-202.252, -1117.09)
+scale = Vector2(0.585813, 5.81818)
+physics_material_override = SubResource("PhysicsMaterial_ok4yu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Icon4/StaticBody2D"]
+position = Vector2(345, 191)
+shape = SubResource("RectangleShape2D_np4on")
+
+[node name="PalmTree1" parent="." instance=ExtResource("3_kh2fj")]
+position = Vector2(389, 164)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Bullets" type="Node2D" parent="."]
+
+[node name="Knifes" type="Node2D" parent="."]
+
+[node name="Bombardino_Crocodilo" parent="." instance=ExtResource("4_np4on")]
+position = Vector2(236, 69)
+
+[node name="Amongus" parent="." instance=ExtResource("5_n5wxi")]
+position = Vector2(7, 230)

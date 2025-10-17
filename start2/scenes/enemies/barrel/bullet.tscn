@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://begdatjidd3j0"]
+
+[ext_resource type="Texture2D" uid="uid://bh8lwuu75mk5h" path="res://assets/monsters/barrel/barrel_bullet.png" id="1_7nsse"]
+[ext_resource type="Script" uid="uid://dc8l4m4bln338" path="res://scenes/enemies/barrel/bullet.gd" id="1_btuxj"]
+[ext_resource type="Script" uid="uid://ba202nuh8h4cl" path="res://scripts/hit_area_2d.gd" id="3_btuxj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wy1d3"]
+size = Vector2(7, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_btuxj"]
+size = Vector2(7, 6)
+
+[node name="Bullet" type="RigidBody2D"]
+disable_mode = 2
+collision_layer = 0
+gravity_scale = 0.0
+continuous_cd = 2
+contact_monitor = true
+script = ExtResource("1_btuxj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_wy1d3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7nsse")
+
+[node name="HitArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("3_btuxj")
+metadata/_custom_type_script = "uid://ba202nuh8h4cl"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_btuxj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="HitArea2D" to="." method="_on_hit_area_2d_area_entered"]

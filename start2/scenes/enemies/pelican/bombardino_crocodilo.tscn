@@ -1,0 +1,126 @@
+[gd_scene load_steps=19 format=3 uid="uid://dbg8lf7nu20en"]
+
+[ext_resource type="Script" uid="uid://y5dac7gtabev" path="res://scenes/enemies/pelican/bombardino_crocodilo.gd" id="1_bupkf"]
+[ext_resource type="Texture2D" uid="uid://bmwu64534qgv2" path="res://assets/monsters/pelican/pelican_01.png" id="4_h1in2"]
+[ext_resource type="Texture2D" uid="uid://dbefh6jah2y5r" path="res://assets/monsters/pelican/pelican_02.png" id="5_kpqkd"]
+[ext_resource type="Texture2D" uid="uid://dw761f534hsq" path="res://assets/monsters/pelican/pelican_03.png" id="6_qkxyn"]
+[ext_resource type="Texture2D" uid="uid://b3ewkkxgxwo45" path="res://assets/monsters/pelican/pelican_04.png" id="7_csk1a"]
+[ext_resource type="Texture2D" uid="uid://bva0rmdfqkllp" path="res://assets/monsters/pelican/pelican_atk_01.png" id="8_vjthv"]
+[ext_resource type="Texture2D" uid="uid://t1l5sq6mwvpy" path="res://assets/monsters/pelican/pelican_atk_02.png" id="9_roona"]
+[ext_resource type="PackedScene" uid="uid://0osqositkyrc" path="res://scenes/enemies/pelican/felican_bullet.tscn" id="10_1bjb1"]
+[ext_resource type="Texture2D" uid="uid://cjkhykjhk6ymu" path="res://assets/monsters/pelican/pelican_atk_03.png" id="10_kioqw"]
+[ext_resource type="Script" uid="uid://df2jwtsbycw6q" path="res://scripts/node2d_factory.gd" id="11_625xr"]
+[ext_resource type="Script" uid="uid://bitm5bvxtqq4y" path="res://scenes/enemies/pelican/run.gd" id="13_5804x"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/hurt_area_2d.gd" id="13_kpqkd"]
+[ext_resource type="Script" uid="uid://bawl18jpm8uf7" path="res://scenes/enemies/pelican/shoot.gd" id="14_1bjb1"]
+[ext_resource type="Script" uid="uid://db1q2lswesbc7" path="res://scenes/enemies/pelican/hurt.gd" id="15_h1in2"]
+[ext_resource type="Script" uid="uid://b1gw3og68wqlw" path="res://scenes/enemies/pelican/dead.gd" id="16_kpqkd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qs3fd"]
+size = Vector2(32, 29)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8mklb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_csk1a")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_csk1a")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_h1in2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_kpqkd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qkxyn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_csk1a")
+}],
+"loop": true,
+"name": &"run",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_vjthv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_roona")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_kioqw")
+}],
+"loop": true,
+"name": &"shoot",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kpqkd"]
+size = Vector2(36, 24)
+
+[node name="Bombardino_Crocodilo" type="CharacterBody2D"]
+script = ExtResource("1_bupkf")
+movement_speed = 100.0
+gravity = 0.0
+metadata/_custom_type_script = "uid://s4xx82espxdt"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8.5)
+shape = SubResource("RectangleShape2D_qs3fd")
+
+[node name="Direction" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_8mklb")
+animation = &"dead"
+autoplay = "run"
+
+[node name="BulletFactory" type="Marker2D" parent="Direction"]
+position = Vector2(31, -29)
+script = ExtResource("11_625xr")
+product_packed_scene = ExtResource("10_1bjb1")
+target_container_name = &"Bullets"
+metadata/_custom_type_script = "uid://df2jwtsbycw6q"
+
+[node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
+position = Vector2(19, -11)
+target_position = Vector2(10, 0)
+
+[node name="HurtArea2D" type="Area2D" parent="Direction"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("13_kpqkd")
+metadata/_custom_type_script = "uid://csu2b21cwchqw"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/HurtArea2D"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_kpqkd")
+
+[node name="States" type="Node" parent="."]
+
+[node name="Run" type="Node" parent="States"]
+script = ExtResource("13_5804x")
+
+[node name="Shoot" type="Node" parent="States"]
+script = ExtResource("14_1bjb1")
+
+[node name="Hurt" type="Node" parent="States"]
+script = ExtResource("15_h1in2")
+
+[node name="Dead" type="Node" parent="States"]
+script = ExtResource("16_kpqkd")

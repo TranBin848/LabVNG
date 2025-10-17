@@ -1,0 +1,6 @@
+Character1\: Hello there!\
+
+- Choice1
+	Character2\: Responds to choice 1.
+- Choice2 | [=" End."]
+	End
