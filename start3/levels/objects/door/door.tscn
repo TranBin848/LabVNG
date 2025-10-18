@@ -92,7 +92,8 @@ script = ExtResource("1_jobty")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -28)
 sprite_frames = SubResource("SpriteFrames_ffxa6")
-animation = &"opening"
+animation = &"idle"
+autoplay = "idle"
 
 [node name="InteractiveArea2D" type="Area2D" parent="."]
 collision_layer = 0

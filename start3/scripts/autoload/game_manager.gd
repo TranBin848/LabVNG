@@ -5,6 +5,7 @@ var target_portal_name: String = ""
 # Checkpoint system variables
 var current_checkpoint_id: String = ""
 var checkpoint_data: Dictionary = {}
+signal checkpoint_changed(new_checkpoint_id: String)
 
 var current_stage = ""
 var player: Player = null
@@ -40,6 +41,7 @@ func respawn_at_portal() -> bool:
 # Checkpoint system functions
 func save_checkpoint(checkpoint_id: String) -> void:
 	current_checkpoint_id = checkpoint_id
+	emit_signal("checkpoint_changed", checkpoint_id)
 	var player_state_dict: Dictionary = player.save_state()
 	checkpoint_data[checkpoint_id] = {
 		"player_state":player_state_dict,

@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://cse8m3ao6w5ao"]
 
 [ext_resource type="Script" uid="uid://btaxxiktfmkyr" path="res://levels/stage.gd" id="1_1f3o5"]
-[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="1_w3aqi"]
+[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player_finished/player.tscn" id="1_w3aqi"]
 [ext_resource type="Texture2D" uid="uid://mxl5crlcqdkc" path="res://icon.svg" id="2_ok4yu"]
 [ext_resource type="PackedScene" uid="uid://bue2ipqykcctm" path="res://scenes/manual_moving_platform.tscn" id="3_1f3o5"]
 [ext_resource type="PackedScene" uid="uid://c8iyq6ukbtgdh" path="res://levels/objects/palm_tree_1.tscn" id="3_kh2fj"]
@@ -81,6 +81,13 @@ physics_material_override = SubResource("PhysicsMaterial_ok4yu")
 position = Vector2(345, 191)
 shape = SubResource("RectangleShape2D_np4on")
 
+[node name="Door" parent="." instance=ExtResource("8_lg0vp")]
+position = Vector2(85, 245)
+target_stage = "uid://bq2fx36tgabgw"
+
+[node name="Player" parent="." instance=ExtResource("1_w3aqi")]
+position = Vector2(170, 217)
+
 [node name="Platforms" type="Node2D" parent="."]
 
 [node name="ManualMovingPlatform" parent="Platforms" instance=ExtResource("3_1f3o5")]
@@ -98,11 +105,8 @@ position = Vector2(336, 181)
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="Player" parent="." instance=ExtResource("1_w3aqi")]
-position = Vector2(126, 156)
-
 [node name="Checkpoint" parent="." instance=ExtResource("6_pupqp")]
 position = Vector2(603, 229)
 
-[node name="Door" parent="." instance=ExtResource("8_lg0vp")]
-position = Vector2(85, 245)
+[node name="Checkpoint2" parent="." instance=ExtResource("6_pupqp")]
+position = Vector2(435, 165)

@@ -6,6 +6,7 @@ extends Node
 var debug: bool = false
 var states: Dictionary = {}
 var current_state: FSMState = null
+var current_state_name: String = ""
 
 var previous_state: FSMState = null
 var default_state: FSMState = null
@@ -64,6 +65,10 @@ func _update(delta: float) -> void:
 			print(obj.name, ": starting with state ", _next_state.name)
 		previous_state = current_state
 		current_state = _next_state
+		current_state_name = current_state.name.to_lower()
 		current_state._enter()
 	# Run state
 	current_state._update(delta)
+
+func is_in_state(state_name: String) -> bool:
+	return current_state_name == state_name.to_lower()

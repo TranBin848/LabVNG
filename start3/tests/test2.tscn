@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bue2ipqykcctm" path="res://scenes/manual_moving_platform.tscn" id="3_iynls"]
 [ext_resource type="PackedScene" uid="uid://c8iyq6ukbtgdh" path="res://levels/objects/palm_tree_1.tscn" id="4_713wt"]
 [ext_resource type="PackedScene" uid="uid://dctrtbmnbrt1j" path="res://scenes/npcs/mushroom.tscn" id="5_qnius"]
-[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="6_6b7m7"]
+[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player_finished/player.tscn" id="6_6b7m7"]
 [ext_resource type="PackedScene" uid="uid://cw41ooeg3pxq1" path="res://levels/objects/checkpoint/checkpoint.tscn" id="7_8wxsi"]
 [ext_resource type="PackedScene" uid="uid://dubb5b1vjmsxd" path="res://levels/objects/door/door.tscn" id="8_4wqbn"]
 
@@ -124,6 +124,13 @@ physics_material_override = SubResource("PhysicsMaterial_ok4yu")
 position = Vector2(345, 191)
 shape = SubResource("RectangleShape2D_np4on")
 
+[node name="Door" parent="." instance=ExtResource("8_4wqbn")]
+position = Vector2(547, 245)
+target_stage = "uid://cse8m3ao6w5ao"
+
+[node name="Player" parent="." instance=ExtResource("6_6b7m7")]
+position = Vector2(126, 156)
+
 [node name="Platforms" type="Node2D" parent="."]
 
 [node name="ManualMovingPlatform" parent="Platforms" instance=ExtResource("3_iynls")]
@@ -133,8 +140,8 @@ position = Vector2(747, 175)
 curve = SubResource("Curve2D_1f3o5")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Platforms/Path2D"]
-position = Vector2(184, 188)
-progress = 305.335
+position = Vector2(-5, 2.00021)
+progress = 0.000427246
 rotates = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Platforms/Path2D/PathFollow2D"]
@@ -159,12 +166,5 @@ position = Vector2(336, 181)
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="Player" parent="." instance=ExtResource("6_6b7m7")]
-position = Vector2(126, 156)
-
 [node name="Checkpoint" parent="." instance=ExtResource("7_8wxsi")]
 position = Vector2(603, 229)
-
-[node name="Door" parent="." instance=ExtResource("8_4wqbn")]
-position = Vector2(547, 245)
-target_stage = "uid://cse8m3ao6w5ao"

@@ -6,6 +6,9 @@ func _enter() -> void:
 	obj.change_animation("idle")
 
 func _update(_delta: float) -> void:
+	if control_dash():
+		return
+	control_attack()
 	#Control jump
 	control_jump()
 	#Control moving

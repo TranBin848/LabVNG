@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://t6eh3b6jmdd7"]
+
+[ext_resource type="Script" uid="uid://eoc1k4q87kd8" path="res://scenes/player/Knifde/knife.gd" id="1_bjx61"]
+[ext_resource type="Texture2D" uid="uid://d0s8rm2fj4wef" path="res://assets/foxy/blade/blade_anim_1.png" id="1_reiu4"]
+[ext_resource type="Script" uid="uid://ba202nuh8h4cl" path="res://scripts/hit_area_2d.gd" id="2_bjx61"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wk31n"]
+size = Vector2(11, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqphe"]
+size = Vector2(13, 8)
+
+[node name="Knife" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_bjx61")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -1)
+shape = SubResource("RectangleShape2D_wk31n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_reiu4")
+
+[node name="HitArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("2_bjx61")
+metadata/_custom_type_script = "uid://ba202nuh8h4cl"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
+position = Vector2(-0.5, -1)
+shape = SubResource("RectangleShape2D_lqphe")

@@ -2,17 +2,32 @@ class_name BaseCharacter
 extends CharacterBody2D
 
 ## Base character class that provides common functionality for all characters
-
+const FRICTION = 2.5
 @export var movement_speed: float = 200.0
 @export var gravity: float = 700.0
 @export var direction: int = 1
+
+var just_wall_jumped := false
+var wall_jump_block_time := 0.75
+var wall_jump_block_timer := 0.0
+
+var is_dashing: bool = false
+var dash_speed: float = 500.0
+var dash_time: float = 0.15
+var dash_timer: float = 0.0
+
+var can_dash: bool = true
+var dash_cooldown: float = 0.8
+var dash_cooldown_timer: float = 0.0
 
 @export var attack_damage: int = 1
 @export var max_health: int = 3
 var health: int = max_health
 
+@onready var hit_area_2d: HitArea2D = $Direction/HitArea2D
 
 var jump_speed: float = 320.0
+var is_jumped_one = false
 var fsm: FSM = null
 var current_animation = null
 var animated_sprite: AnimatedSprite2D = null
@@ -23,15 +38,28 @@ var _next_animated_sprite: AnimatedSprite2D = null
 
 func _ready() -> void:
 	set_animated_sprite($Direction/AnimatedSprite2D)
-
+	
 func _physics_process(delta: float) -> void:
 	# Animation
 	_check_changed_animation()
-
+	
+	if wall_jump_block_timer > 0:
+		wall_jump_block_timer -= delta
+		if wall_jump_block_timer <= 0:
+			just_wall_jumped = false
+			
+	if not can_dash:
+		dash_cooldown_timer -= delta
+		if dash_cooldown_timer <= 0:
+			can_dash = true
+	
 	if fsm != null:
 		fsm._update(delta)
-	# Movement
-	_update_movement(delta)
+
+	# Chỉ cập nhật movement nếu KHÔNG phải đang climb
+	if fsm == null or not fsm.is_in_state("climb"):
+		_update_movement(delta)
+
 	# Direction
 	_check_changed_direction()
 
@@ -40,6 +68,7 @@ func _update_movement(delta: float) -> void:
 	velocity.y += gravity * delta
 	move_and_slide()
 	pass
+
 
 func turn_around() -> void:
 	if _next_direction != direction:
@@ -59,6 +88,8 @@ func turn_right() -> void:
 	_next_direction = 1
 
 func jump() -> void:
+	if(is_on_floor()): is_jumped_one = true;
+	else: is_jumped_one = false
 	velocity.y = -jump_speed
 
 func stop_move() -> void:
@@ -112,3 +143,13 @@ func _check_changed_direction() -> void:
 # On changed direction
 func _on_changed_direction() -> void:
 	pass
+
+func is_touching_wall() -> bool:
+	if is_on_wall():
+		# Kiểm tra hướng va chạm có cùng hướng di chuyển
+		var wall_normal = get_last_slide_collision().get_normal()
+		if wall_normal != null:
+			# Nếu nhân vật đang facing phải mà tường ở bên phải → dính
+			if (direction == 1 and wall_normal.x < 0) or (direction == -1 and wall_normal.x > 0):
+				return true
+	return false
