@@ -338,6 +338,7 @@ script = ExtResource("47_hyqqp")
 [node name="RayCast2D" type="RayCast2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -31)
 zoom = Vector2(2, 2)
 
 [connection signal="animation_finished" from="Direction/AnimatedSprite2D" to="States/Attack" method="_on_animated_sprite_2d_animation_finished"]

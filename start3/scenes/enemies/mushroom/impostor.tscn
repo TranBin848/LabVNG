@@ -1,0 +1,120 @@
+[gd_scene load_steps=17 format=3 uid="uid://dik5oi23v6ils"]
+
+[ext_resource type="Script" uid="uid://ckxyu1nirrm73" path="res://scenes/enemies/mushroom/impostor.gd" id="1_pq4je"]
+[ext_resource type="Texture2D" uid="uid://cnffiueq84mw3" path="res://assets/monsters/mushroom/mushroom_hurt_01.png" id="2_mk2lg"]
+[ext_resource type="Texture2D" uid="uid://3618lytb7nnv" path="res://assets/monsters/mushroom/mushroom_01.png" id="2_pq4je"]
+[ext_resource type="Texture2D" uid="uid://dx008fsd6muo7" path="res://assets/monsters/mushroom/mushroom_hurt_02.png" id="3_34tyc"]
+[ext_resource type="Texture2D" uid="uid://bqgmklofxv0qi" path="res://assets/monsters/mushroom/mushroom_02.png" id="3_w2t7s"]
+[ext_resource type="Texture2D" uid="uid://cghgcxg1pvwd6" path="res://assets/monsters/mushroom/mushroom_03.png" id="4_2m36n"]
+[ext_resource type="Texture2D" uid="uid://dnlagy1ygfmpg" path="res://assets/monsters/mushroom/mushroom_hurt_03.png" id="4_vbaic"]
+[ext_resource type="Script" uid="uid://dmyev2ork0vor" path="res://scenes/enemies/states/run.gd" id="5_grtgk"]
+[ext_resource type="Script" uid="uid://due8of7dmgh87" path="res://scenes/enemies/mushroom/hurt.gd" id="6_2m36n"]
+[ext_resource type="Script" uid="uid://ba202nuh8h4cl" path="res://scripts/hit_area_2d.gd" id="6_pq4je"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/hurt_area_2d.gd" id="7_w2t7s"]
+[ext_resource type="Script" uid="uid://c6r2f0xq4yfbi" path="res://scenes/enemies/mushroom/dead.gd" id="10_34tyc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ossqi"]
+size = Vector2(22, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mk2lg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mk2lg")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mk2lg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_34tyc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vbaic")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pq4je")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_w2t7s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_2m36n")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w2t7s"]
+size = Vector2(36, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2m36n"]
+size = Vector2(24, 25)
+
+[node name="Impostor" type="CharacterBody2D"]
+script = ExtResource("1_pq4je")
+metadata/_custom_type_script = "uid://s4xx82espxdt"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_ossqi")
+
+[node name="Direction" type="Node2D" parent="."]
+
+[node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
+position = Vector2(9, -4)
+target_position = Vector2(11, 0)
+
+[node name="DownRayCast2D" type="RayCast2D" parent="Direction"]
+position = Vector2(13, 15)
+target_position = Vector2(0, 8)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
+modulate = Color(0.726322, 0, 0.251884, 1)
+sprite_frames = SubResource("SpriteFrames_mk2lg")
+animation = &"dead"
+autoplay = "run"
+
+[node name="HitArea2D" type="Area2D" parent="Direction"]
+position = Vector2(0, 2)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("6_pq4je")
+metadata/_custom_type_script = "uid://ba202nuh8h4cl"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/HitArea2D"]
+position = Vector2(1, 2.5)
+shape = SubResource("RectangleShape2D_w2t7s")
+
+[node name="HurtArea2D" type="Area2D" parent="Direction"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("7_w2t7s")
+metadata/_custom_type_script = "uid://csu2b21cwchqw"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/HurtArea2D"]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_2m36n")
+
+[node name="States" type="Node" parent="."]
+
+[node name="Run" type="Node" parent="States"]
+script = ExtResource("5_grtgk")
+
+[node name="Hurt" type="Node" parent="States"]
+script = ExtResource("6_2m36n")
+
+[node name="Dead" type="Node" parent="States"]
+script = ExtResource("10_34tyc")
+
+[connection signal="hurt" from="Direction/HurtArea2D" to="." method="_on_hurt_area_2d_hurt"]

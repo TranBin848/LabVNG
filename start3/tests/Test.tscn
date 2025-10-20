@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player_finished/player.tscn" id="1_w3aqi"]
 [ext_resource type="Texture2D" uid="uid://mxl5crlcqdkc" path="res://icon.svg" id="2_ok4yu"]
 [ext_resource type="PackedScene" uid="uid://bue2ipqykcctm" path="res://scenes/manual_moving_platform.tscn" id="3_1f3o5"]
-[ext_resource type="PackedScene" uid="uid://c8iyq6ukbtgdh" path="res://levels/objects/palm_tree_1.tscn" id="3_kh2fj"]
+[ext_resource type="PackedScene" uid="uid://bmhud8xs71feb" path="res://levels/objects/palm_tree_1.tscn" id="3_kh2fj"]
 [ext_resource type="PackedScene" uid="uid://h0v71ekm7yl2" path="res://scenes/path_2d.tscn" id="4_8a3cw"]
 [ext_resource type="PackedScene" uid="uid://cw41ooeg3pxq1" path="res://levels/objects/checkpoint/checkpoint.tscn" id="6_pupqp"]
 [ext_resource type="PackedScene" uid="uid://dctrtbmnbrt1j" path="res://scenes/npcs/mushroom.tscn" id="7_1f3o5"]

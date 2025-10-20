@@ -1,13 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://bq2fx36tgabgw"]
+[gd_scene load_steps=17 format=3 uid="uid://bq2fx36tgabgw"]
 
 [ext_resource type="Script" uid="uid://btaxxiktfmkyr" path="res://levels/stage.gd" id="1_i4tbu"]
 [ext_resource type="Texture2D" uid="uid://mxl5crlcqdkc" path="res://icon.svg" id="2_4wqbn"]
 [ext_resource type="PackedScene" uid="uid://bue2ipqykcctm" path="res://scenes/manual_moving_platform.tscn" id="3_iynls"]
-[ext_resource type="PackedScene" uid="uid://c8iyq6ukbtgdh" path="res://levels/objects/palm_tree_1.tscn" id="4_713wt"]
+[ext_resource type="PackedScene" uid="uid://bmhud8xs71feb" path="res://levels/objects/palm_tree_1.tscn" id="4_713wt"]
 [ext_resource type="PackedScene" uid="uid://dctrtbmnbrt1j" path="res://scenes/npcs/mushroom.tscn" id="5_qnius"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player_finished/player.tscn" id="6_6b7m7"]
 [ext_resource type="PackedScene" uid="uid://cw41ooeg3pxq1" path="res://levels/objects/checkpoint/checkpoint.tscn" id="7_8wxsi"]
 [ext_resource type="PackedScene" uid="uid://dubb5b1vjmsxd" path="res://levels/objects/door/door.tscn" id="8_4wqbn"]
+[ext_resource type="PackedScene" uid="uid://dyudd4uaoywg6" path="res://scenes/enemies/spike/durian.tscn" id="9_iynls"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ok4yu"]
 
@@ -140,8 +141,7 @@ position = Vector2(747, 175)
 curve = SubResource("Curve2D_1f3o5")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Platforms/Path2D"]
-position = Vector2(-5, 2.00021)
-progress = 0.000427246
+position = Vector2(-5, 2)
 rotates = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Platforms/Path2D/PathFollow2D"]
@@ -168,3 +168,6 @@ position = Vector2(336, 181)
 
 [node name="Checkpoint" parent="." instance=ExtResource("7_8wxsi")]
 position = Vector2(603, 229)
+
+[node name="Durian" parent="." instance=ExtResource("9_iynls")]
+position = Vector2(201, 229)

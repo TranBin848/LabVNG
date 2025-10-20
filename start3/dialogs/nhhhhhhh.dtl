@@ -6,10 +6,10 @@ foxy: Vâng! Hãy bắt đầu với text multi-line. \
 Đây là dòng thứ hai, \
 và dòng thứ ba!
 
-
-mushroom: Tiếp theo chúng ta sẽ bắt đầu với 10 điểm cho người chơi
 # Set Variable event
 set {PlayerScore} = Dialogic.VAR["PlayerScore"]
+mushroom: Tiếp theo chúng ta sẽ bắt đầu với {PlayerScore} điểm cho người chơi
+
 # Label event
 label MyLabel (Nhãn Minh Họa)
 # Choice event với condition và else
