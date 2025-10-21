@@ -1,16 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://bue2ipqykcctm"]
+[gd_scene load_steps=6 format=3 uid="uid://bue2ipqykcctm"]
 
 [ext_resource type="Texture2D" uid="uid://bn23ps3jhu4ru" path="res://assets/island/objects/moving_platform/moving_platform.png" id="1_2kswd"]
-[ext_resource type="Script" uid="uid://dfi0o4l1bb0ur" path="res://scenes/manual_moving_platform.gd" id="1_7w38m"]
+[ext_resource type="Script" uid="uid://cxhfussfscic" path="res://scenes/auto_moving_platform.gd" id="1_t1tmw"]
+[ext_resource type="Script" uid="uid://nvuabioddqmj" path="res://scripts/interactive_area_2d.gd" id="3_t1tmw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7w38m"]
 size = Vector2(84, 14)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t1tmw"]
+size = Vector2(86, 21)
+
 [node name="ManualMovingPlatform" type="AnimatableBody2D"]
-script = ExtResource("1_7w38m")
+script = ExtResource("1_t1tmw")
 
 [node name="MovingPlatform" type="Sprite2D" parent="."]
 texture = ExtResource("1_2kswd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7w38m")
+
+[node name="InteractiveArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_t1tmw")
+metadata/_custom_type_script = "uid://nvuabioddqmj"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea2D"]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_t1tmw")
+
+[connection signal="area_entered" from="InteractiveArea2D" to="." method="_on_interactive_area_2d_area_entered"]
+[connection signal="interacted" from="InteractiveArea2D" to="." method="_on_interactive_area_2d_interacted"]

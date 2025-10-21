@@ -1,44 +1,34 @@
 extends AnimatableBody2D
 
 @export var move_speed: float = 100.0
-@export var move_distance: float = 200.0
-@export var acceleration: float = 200.0   # tốc độ tăng/giảm vận tốc
-@export var wait_time: float = 0.5        # dừng lại một chút ở hai đầu
+@export var move_distance: float = 300.0
 
 var start_position: Vector2
-var direction: int = 1
-var velocity: float = 0.0
-var target_velocity: float = 0.0
-var is_waiting: bool = false
+var is_moving: bool = false
+var direction: int = -1  # -1 = đi lên, 1 = đi xuống
 
 func _ready():
 	start_position = global_position
 
+
 func _physics_process(delta):
-	if is_waiting:
+	if not is_moving:
 		return
 
-	var target_y = start_position.y + (move_distance * direction)
+	global_position.y += move_speed * direction * delta
 
-	# Nếu gần tới giới hạn thì chuẩn bị đổi hướng
-	if direction == 1 and global_position.y >= target_y:
-		direction = -1
-		_start_wait()
-	elif direction == -1 and global_position.y <= start_position.y - move_distance:
-		direction = 1
-		_start_wait()
+	# Nếu đi lên tới giới hạn trên
+	if direction == -1 and global_position.y <= start_position.y - move_distance:
+		global_position.y = start_position.y - move_distance
+		is_moving = false
+		direction = 1 
 
-	# Xác định vận tốc mục tiêu (hướng lên hoặc xuống)
-	target_velocity = move_speed * direction
+	# Nếu đi xuống tới giới hạn dưới
+	elif direction == 1 and global_position.y >= start_position.y:
+		global_position.y = start_position.y
+		is_moving = false
+		direction = -1 
 
-	# Dùng move_toward để thay đổi vận tốc dần dần
-	velocity = move_toward(velocity, target_velocity, acceleration * delta)
-
-	# Di chuyển platform
-	global_position.y += velocity * delta
-
-func _start_wait() -> void:
-	is_waiting = true
-	velocity = 0.0
-	await get_tree().create_timer(wait_time).timeout
-	is_waiting = false
+func _on_interactive_area_2d_interacted() -> void:
+	if not is_moving:
+		is_moving = true

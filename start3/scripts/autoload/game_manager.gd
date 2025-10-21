@@ -9,6 +9,7 @@ signal checkpoint_changed(new_checkpoint_id: String)
 
 var current_stage = ""
 var player: Player = null
+var has_blade: bool = false 
 
 func _ready() -> void:
 	# Load checkpoint data when game starts
@@ -112,3 +113,15 @@ func clear_checkpoint_data() -> void:
 	checkpoint_data.clear()
 	SaveSystem.delete_save_file()
 	print("All checkpoint data cleared")
+
+# 🗡️ Gọi khi người chơi nhận kiếm từ hội thoại
+func collect_blade() -> void:
+	if has_blade:
+		print("⚔️ Player already has the blade.")
+		return
+	
+	has_blade = true
+	print("⚔️ Player collected the blade!")
+
+	if player:
+		player.collected_blade()

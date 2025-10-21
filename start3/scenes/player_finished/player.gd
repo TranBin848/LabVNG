@@ -5,7 +5,7 @@ extends BaseCharacter
 var is_invulnerable: bool = false
 @export var invulnerability_duration: float = 2
 var invul_timer: float = 0.0
-@export var has_blade: bool = true
+@export var has_blade: bool = false
 
 @export var knife_speed: float = 300
 @onready var knife_factory := $Direction/KnifeFactory

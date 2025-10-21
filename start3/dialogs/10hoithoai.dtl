@@ -1,0 +1,44 @@
+# Comment: Cuộc trò chuyện hài hước giữa Foxy và Mushroom về gia đình (có lựa chọn)
+
+mushroom: Chào Foxy! Hôm nay trông cậu có vẻ mệt mỏi nhỉ, lại cãi nhau với bố à?
+
+foxy: Ờ… ông già tớ lại bảo tớ phải săn gà thay vì săn nấm. Tớ bảo "bố ơi con ăn chay rồi", thế là ông ấy ném nguyên con gà vào mặt tớ luôn! [pause=1]
+
+mushroom: Haha! Còn tớ thì khác, bố tớ là một cái **nấm mốc**, chỉ nằm im trong góc mà cũng được gọi là "trưởng họ". [portrait=confused]
+
+foxy: Thế mẹ cậu làm gì?
+
+mushroom: Mẹ tớ là **nấm mèo**, mỗi lần giận là phồng to lên rồi xào tớ ăn luôn! [pause=1] May mà tớ mọc lại được.
+
+foxy: Trời ơi... còn nhà tớ thì mẹ là **cáo trắng**, cứ mỗi lần tớ về muộn là bà ấy hỏi "mày đi với con nấm nào thế hả?!"
+
+mushroom: Ê đừng nhìn tớ như vậy nha! Tớ trong sáng lắm. [pause=0.5] À mà cậu có anh chị em không?
+
+foxy: Có! Một đứa em tên **Foxy Jr.**, nó nghĩ mình là “main character” và suốt ngày tập pose như anime. [portrait=angry]
+
+# Choice Event: Người chơi chọn hỏi về bố hay mẹ
+- Hỏi về bố ai buồn cười hơn:
+    jump HoiBo
+- Hỏi về mẹ ai dữ hơn:
+    jump HoiMe
+
+# --- Nhánh 1: Bố ai buồn cười hơn ---
+label HoiBo (So sánh ông bố)
+mushroom: Bố tớ mà nói chuyện là cả nhà ngủ luôn. Giọng ông ấy monotone hơn cả tiếng quạt điện! [pause=1]
+foxy: Thế mà vẫn buồn cười đó! Bố tớ thì lúc nào cũng kể chuyện "ngày xưa ta từng bắt 10 con gà", mà thật ra chỉ là bắt 1 con... bị bệnh. [pause=0.5]
+mushroom: Haha, chắc hai ông mà gặp nhau thì lập luôn câu lạc bộ “Hội Bố Dở Hơi Ẩn Dật”! [pause=1]
+jump EndTalk
+
+# --- Nhánh 2: Mẹ ai dữ hơn ---
+label HoiMe (So sánh các bà mẹ)
+foxy: Mẹ tớ dữ như sói luôn. Một lần tớ làm bẩn ổ, bà ấy nhìn tớ kiểu “tao sinh mày ra là sai lầm của rừng xanh”. [pause=1]
+mushroom: Mẹ tớ thì không mắng, chỉ... nổi bọt. Rồi cả nhà biết là nên chạy đi rửa chén ngay! [pause=1]
+foxy: Vãi cả nấm, mẹ cậu hóa học thật sự. [pause=0.5]
+jump EndTalk
+
+# --- Phần kết ---
+label EndTalk (Kết thúc hội thoại)
+mushroom: Haha, nói chuyện vui thế này tớ quên luôn vụ nấu súp rồi!
+foxy: Thôi mai ta kể tiếp, kẻo mẹ cậu phồng lên nữa thì hết chỗ mà ngồi đó!
+mushroom: Deal! [pause=0.5] Lần sau kể về ông nội nấm nha, ông ấy từng làm DJ trong rừng đó.
+[end_timeline]

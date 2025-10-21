@@ -1,0 +1,6 @@
+mushroom: Chào Cáo! Cậu có muốn nhận thanh Kiếm cổ không?
+- Có chứ.
+	foxy: Có chứ.
+	do GameManager.collect_blade()
+- Không cần đâu, cảm ơn.
+	foxy: Không cần đâu, cảm ơn.

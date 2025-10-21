@@ -11,42 +11,46 @@
 [ext_resource type="PackedScene" uid="uid://lx24i8fl6uo" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_History/history_layer.tscn" id="9_qe1fb"]
 [ext_resource type="Script" uid="uid://dv08k6ljua6fm" path="res://addons/dialogic/Resources/dialogic_style.gd" id="10_lk1n1"]
 
-[sub_resource type="Resource" id="Resource_j5pwd"]
+[sub_resource type="Resource" id="Resource_m3ckf"]
 script = ExtResource("2_qytwt")
 scene = ExtResource("1_j5pwd")
 overrides = {}
 
-[sub_resource type="Resource" id="Resource_qytwt"]
+[sub_resource type="Resource" id="Resource_gjuix"]
 script = ExtResource("2_qytwt")
 scene = ExtResource("3_61sbj")
-overrides = {}
+overrides = {
+"disabled": "true"
+}
 
-[sub_resource type="Resource" id="Resource_61sbj"]
+[sub_resource type="Resource" id="Resource_01llc"]
 script = ExtResource("2_qytwt")
 scene = ExtResource("4_4083t")
 overrides = {}
 
-[sub_resource type="Resource" id="Resource_4083t"]
+[sub_resource type="Resource" id="Resource_qlt6t"]
 script = ExtResource("2_qytwt")
 scene = ExtResource("5_csiil")
-overrides = {}
+overrides = {
+"text_custom_color": "Color(0.691406, 0.373218, 0.299789, 1)"
+}
 
-[sub_resource type="Resource" id="Resource_csiil"]
+[sub_resource type="Resource" id="Resource_qhbok"]
 script = ExtResource("2_qytwt")
 scene = ExtResource("6_g7hku")
 overrides = {}
 
-[sub_resource type="Resource" id="Resource_g7hku"]
+[sub_resource type="Resource" id="Resource_vydn3"]
 script = ExtResource("2_qytwt")
 scene = ExtResource("7_yt5bn")
 overrides = {}
 
-[sub_resource type="Resource" id="Resource_yt5bn"]
+[sub_resource type="Resource" id="Resource_db85b"]
 script = ExtResource("2_qytwt")
 scene = ExtResource("8_26dui")
 overrides = {}
 
-[sub_resource type="Resource" id="Resource_26dui"]
+[sub_resource type="Resource" id="Resource_wd4fe"]
 script = ExtResource("2_qytwt")
 scene = ExtResource("9_qe1fb")
 overrides = {}
@@ -56,15 +60,15 @@ script = ExtResource("10_lk1n1")
 name = "dialogic_style"
 layer_list = Array[String](["10", "11", "12", "13", "14", "15", "16"])
 layer_info = {
-"": SubResource("Resource_j5pwd"),
-"10": SubResource("Resource_qytwt"),
-"11": SubResource("Resource_61sbj"),
-"12": SubResource("Resource_4083t"),
-"13": SubResource("Resource_csiil"),
-"14": SubResource("Resource_g7hku"),
-"15": SubResource("Resource_yt5bn"),
-"16": SubResource("Resource_26dui")
+"": SubResource("Resource_m3ckf"),
+"10": SubResource("Resource_gjuix"),
+"11": SubResource("Resource_01llc"),
+"12": SubResource("Resource_qlt6t"),
+"13": SubResource("Resource_qhbok"),
+"14": SubResource("Resource_vydn3"),
+"15": SubResource("Resource_db85b"),
+"16": SubResource("Resource_wd4fe")
 }
 base_overrides = {}
 layers = Array[ExtResource("2_qytwt")]([])
-metadata/_latest_layer = ""
+metadata/_latest_layer = "10"

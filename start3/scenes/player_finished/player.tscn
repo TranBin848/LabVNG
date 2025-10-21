@@ -262,14 +262,13 @@ shape = SubResource("CapsuleShape2D_oul6g")
 [node name="Direction" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
-process_mode = 4
-visible = false
 position = Vector2(0, -13)
 sprite_frames = SubResource("SpriteFrames_ge24q")
-animation = &"idle"
+animation = &"run"
 autoplay = "idle"
 
 [node name="BladeAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
+visible = false
 position = Vector2(0, -13)
 sprite_frames = SubResource("SpriteFrames_j4nxn")
 animation = &"dead"

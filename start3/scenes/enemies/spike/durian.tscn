@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dyudd4uaoywg6"]
 
-[ext_resource type="Texture2D" uid="uid://oxacuyx3jgy5" path="res://assets/monsters/spikes/spikes.png" id="1_6xhi5"]
-[ext_resource type="Script" uid="uid://ba202nuh8h4cl" path="res://scripts/hit_area_2d.gd" id="1_y0huk"]
+[ext_resource type="Texture2D" uid="uid://b1ipt3fe05v60" path="res://assets/monsters/spikes/spikes.png" id="1_6xhi5"]
+[ext_resource type="Script" uid="uid://cskdv6tj5dtso" path="res://scripts/hit_area_2d.gd" id="1_y0huk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y0huk"]
 size = Vector2(29, 11)
@@ -15,7 +15,6 @@ texture = ExtResource("1_6xhi5")
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("1_y0huk")
-metadata/_custom_type_script = "uid://ba202nuh8h4cl"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
 position = Vector2(-0.5, 10.5)

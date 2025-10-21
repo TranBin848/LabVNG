@@ -33,8 +33,10 @@ layout/style_directory={
 "dialogic_style": "res://dialogs/custom/dialogic_style.tres"
 }
 directories/dtl_directory={
-"nhhhhhhh": "res://dialogs/nhhhhhhh.dtl",
-"timelines": "res://dialogs/timelines.dtl"
+"10hoithoai": "res://dialogs/10hoithoai.dtl",
+"mushroom_has_blade": "res://dialogs/mushroom_has_blade.dtl",
+"mushroom_no_blade": "res://dialogs/mushroom_no_blade.dtl",
+"nhhhhhhh": "res://dialogs/haha.dtl"
 }
 directories/dch_directory={
 "character": "res://dialogs/character.dch",

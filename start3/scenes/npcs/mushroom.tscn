@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://cghgcxg1pvwd6" path="res://assets/monsters/mushroom/mushroom_03.png" id="3_a8gqk"]
 [ext_resource type="Script" uid="uid://nvuabioddqmj" path="res://scripts/interactive_area_2d.gd" id="4_4v02b"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_80kq2"]
+size = Vector2(30, 20)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_2k2xe"]
 animations = [{
 "frames": [{
@@ -30,17 +33,8 @@ func _ready() -> void:
 	play(\"idle\")
 "
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_80kq2"]
-
 [node name="Mushroom" type="Node2D"]
 script = ExtResource("1_o7alk")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -15)
-sprite_frames = SubResource("SpriteFrames_2k2xe")
-animation = &"idle"
-frame_progress = 0.597652
-script = SubResource("GDScript_o7alk")
 
 [node name="InteractiveArea2D" type="Area2D" parent="."]
 collision_layer = 0
@@ -49,7 +43,14 @@ script = ExtResource("4_4v02b")
 metadata/_custom_type_script = "uid://nvuabioddqmj"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea2D"]
-position = Vector2(0, -10)
+position = Vector2(5, -10)
 shape = SubResource("RectangleShape2D_80kq2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="InteractiveArea2D/CollisionShape2D"]
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_2k2xe")
+animation = &"idle"
+frame_progress = 0.597652
+script = SubResource("GDScript_o7alk")
 
 [connection signal="interacted" from="InteractiveArea2D" to="." method="_on_interactive_area_2d_interacted"]
