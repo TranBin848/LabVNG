@@ -4,7 +4,6 @@ extends PlayerState
 
 func _enter() -> void:
 	obj.change_animation("idle")
-
 func _update(_delta: float) -> void:
 	if control_dash():
 		return

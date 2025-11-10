@@ -1,13 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://cse8m3ao6w5ao"]
+[gd_scene load_steps=11 format=3 uid="uid://cse8m3ao6w5ao"]
 
 [ext_resource type="Script" uid="uid://btaxxiktfmkyr" path="res://levels/stage.gd" id="1_1f3o5"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player_finished/player.tscn" id="1_w3aqi"]
 [ext_resource type="Texture2D" uid="uid://mxl5crlcqdkc" path="res://icon.svg" id="2_ok4yu"]
-[ext_resource type="PackedScene" uid="uid://bue2ipqykcctm" path="res://scenes/manual_moving_platform.tscn" id="3_1f3o5"]
 [ext_resource type="PackedScene" uid="uid://bmhud8xs71feb" path="res://levels/objects/palm_tree_1.tscn" id="3_kh2fj"]
-[ext_resource type="PackedScene" uid="uid://h0v71ekm7yl2" path="res://scenes/path_2d.tscn" id="4_8a3cw"]
-[ext_resource type="PackedScene" uid="uid://cw41ooeg3pxq1" path="res://levels/objects/checkpoint/checkpoint.tscn" id="6_pupqp"]
 [ext_resource type="PackedScene" uid="uid://dctrtbmnbrt1j" path="res://scenes/npcs/mushroom.tscn" id="7_1f3o5"]
+[ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="7_lg0vp"]
 [ext_resource type="PackedScene" uid="uid://dubb5b1vjmsxd" path="res://levels/objects/door/door.tscn" id="8_lg0vp"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ok4yu"]
@@ -83,17 +81,21 @@ shape = SubResource("RectangleShape2D_np4on")
 
 [node name="Door" parent="." instance=ExtResource("8_lg0vp")]
 position = Vector2(85, 245)
-target_stage = "uid://bq2fx36tgabgw"
+target_stage = "uid://cse8m3ao6w5ao"
+target_door = "Door2"
+
+[node name="Door2" parent="." instance=ExtResource("8_lg0vp")]
+position = Vector2(542, 245)
+target_stage = "uid://cse8m3ao6w5ao"
+
+[node name="Door3" parent="." instance=ExtResource("8_lg0vp")]
+position = Vector2(793, 245)
+target_stage = "uid://cdx1idk2rmdnx"
 
 [node name="Player" parent="." instance=ExtResource("1_w3aqi")]
 position = Vector2(170, 217)
 
 [node name="Platforms" type="Node2D" parent="."]
-
-[node name="ManualMovingPlatform" parent="Platforms" instance=ExtResource("3_1f3o5")]
-position = Vector2(558, 193)
-
-[node name="Path2D" parent="Platforms" instance=ExtResource("4_8a3cw")]
 
 [node name="PalmTree1" parent="." instance=ExtResource("3_kh2fj")]
 position = Vector2(389, 164)
@@ -105,8 +107,14 @@ position = Vector2(336, 181)
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="Checkpoint" parent="." instance=ExtResource("6_pupqp")]
-position = Vector2(603, 229)
-
-[node name="Checkpoint2" parent="." instance=ExtResource("6_pupqp")]
-position = Vector2(435, 165)
+[node name="InstructLabel" type="Label" parent="."]
+offset_left = 692.0
+offset_top = 157.0
+offset_right = 1038.0
+offset_bottom = 236.0
+theme_override_colors/font_color = Color(1, 0.491967, 0.254034, 1)
+theme_override_constants/line_spacing = 5
+theme_override_fonts/font = ExtResource("7_lg0vp")
+theme_override_font_sizes/font_size = 16
+text = "Back to scene1"
+metadata/_edit_use_anchors_ = true

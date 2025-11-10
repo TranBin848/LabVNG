@@ -8,6 +8,7 @@ signal checkpoint_activated(checkpoint_id: String)
 
 var is_activated: bool = false
 
+
 func _ready() -> void:
 	if checkpoint_id.is_empty():
 		checkpoint_id = str(get_path())
@@ -15,7 +16,7 @@ func _ready() -> void:
 	# Kết nối signal từ GameManager
 	GameManager.checkpoint_changed.connect(_on_checkpoint_changed)
 
-	# Khi khởi động, đặt trạng thái phù hợp
+	# Nếu checkpoint hiện tại trùng với checkpoint trong GameManager
 	if GameManager.current_checkpoint_id == checkpoint_id:
 		activate_visual_only()
 	else:
@@ -32,10 +33,11 @@ func activate() -> void:
 		return
 	is_activated = true
 
+	# 🔹 Gọi GameManager để xử lý save
 	GameManager.save_checkpoint(checkpoint_id)
-	GameManager.save_checkpoint_data()
+
 	checkpoint_activated.emit(checkpoint_id)
-	print("Checkpoint activated: ", checkpoint_id)
+	print("✅ Checkpoint activated:", checkpoint_id)
 
 	animated_sprite_2d.play("active")
 
@@ -45,13 +47,10 @@ func activate_visual_only() -> void:
 	animated_sprite_2d.play("active")
 
 
-# Nhận tín hiệu khi checkpoint khác được kích hoạt
 func _on_checkpoint_changed(new_id: String) -> void:
 	if new_id == checkpoint_id:
-		# chính là checkpoint hiện tại
 		if not is_activated:
 			activate_visual_only()
 	else:
-		# không phải checkpoint hiện tại → về idle
 		is_activated = false
 		animated_sprite_2d.play("idle")

@@ -1,54 +1,96 @@
 extends Node
 
-#target portal name is the name of the portal to which the player will be teleported
+# --- Portal & Stage ---
 var target_portal_name: String = ""
-# Checkpoint system variables
+var current_stage: Node = null
+var player: Player = null
+
+# --- Checkpoint system ---
 var current_checkpoint_id: String = ""
 var checkpoint_data: Dictionary = {}
 signal checkpoint_changed(new_checkpoint_id: String)
 
-var current_stage = ""
-var player: Player = null
-var has_blade: bool = false 
+# --- Player states ---
+var has_blade: bool = false
 
 func _ready() -> void:
-	# Load checkpoint data when game starts
-	load_checkpoint_data()
-	
-	pass
+	# Load checkpoint khi mở game
+	#load_checkpoint_data()
+	# Theo dõi thay đổi scene để tự khôi phục trạng thái
+	get_tree().connect("scene_changed", Callable(self, "_on_scene_changed"))
 
-#change stage by path and target portal name
+
+# --- Khi đổi scene ---
+func _on_scene_changed(new_scene: Node) -> void:
+	current_stage = new_scene
+	player = current_stage.find_child("Player", true, false)
+
+	if not player:
+		print("⚠️ Không tìm thấy Player trong scene mới.")
+		return
+
+	# Nếu có checkpoint → khôi phục trạng thái
+	if current_checkpoint_id in checkpoint_data:
+		var checkpoint_info = checkpoint_data[current_checkpoint_id]
+		player.health = checkpoint_info.get("health", player.max_health)
+		player.has_blade = checkpoint_info.get("has_blade", false)
+		player.load_state(checkpoint_info.get("player_state", {}))
+
+		if player.has_blade:
+			player.collected_blade()
+
+		print("✅ Player đã được khôi phục từ checkpoint:", current_checkpoint_id)
+	else:
+		print("ℹ️ Không có dữ liệu checkpoint cho scene này.")
+
+
+# --- Chuyển stage ---
 func change_stage(stage_path: String, _target_portal_name: String = "") -> void:
 	target_portal_name = _target_portal_name
-	#change scene to stage path
 	get_tree().change_scene_to_file(stage_path)
 
 
-#call from dialogic
-func call_from_dialogic(msg:String = ""):
-	#Dialogic.VAR["PlayerScore"] = 30
-	print("Call from dialogic " + msg)
+# --- Gọi từ Dialogic ---
+func call_from_dialogic(msg: String = ""):
+	print("📜 Call from dialogic:", msg)
 
 
-#respawn at portal or door
+# --- Dịch chuyển qua cổng ---
 func respawn_at_portal() -> bool:
-	if not target_portal_name.is_empty():
-		player.global_position = current_stage.find_child(target_portal_name).global_position
-		GameManager.target_portal_name = ""
-		true
+	if not target_portal_name.is_empty() and current_stage:
+		var door = current_stage.find_child(target_portal_name)
+		if door and player:
+			player.global_position = door.global_position
+			target_portal_name = ""
+			return true
 	return false
 
 
-# Checkpoint system functions
+# --- Checkpoint System ---
 func save_checkpoint(checkpoint_id: String) -> void:
+	if not player:
+		push_error("⚠️ Player not found when saving checkpoint")
+		return
+
 	current_checkpoint_id = checkpoint_id
 	emit_signal("checkpoint_changed", checkpoint_id)
+
 	var player_state_dict: Dictionary = player.save_state()
 	checkpoint_data[checkpoint_id] = {
-		"player_state":player_state_dict,
-		"stage_path": current_stage.scene_file_path
+		"player_state": player_state_dict,
+		"stage_path": current_stage.scene_file_path,
+		"health": player.health,
+		"has_blade": player.has_blade
 	}
-	print("Checkpoint saved: ", checkpoint_id)
+
+	print("✅ Checkpoint saved:", checkpoint_id)
+	
+	# Ghi xuống file thật
+	SaveSystem.save_checkpoint_data(
+		checkpoint_id,
+		checkpoint_data[checkpoint_id],
+		current_stage.scene_file_path
+	)
 
 
 func load_checkpoint(checkpoint_id: String) -> Dictionary:
@@ -56,70 +98,77 @@ func load_checkpoint(checkpoint_id: String) -> Dictionary:
 		return checkpoint_data[checkpoint_id]
 	return {}
 
-#respawn at checkpoint
+
+# --- Hồi sinh từ checkpoint ---
 func respawn_at_checkpoint() -> void:
 	if current_checkpoint_id.is_empty():
-		print("No checkpoint available")
+		print("⚠️ No checkpoint available")
 		return
-	
+
 	var checkpoint_info = checkpoint_data.get(current_checkpoint_id, {})
 	if checkpoint_info.is_empty():
-		print("Checkpoint data not found")
+		print("⚠️ Checkpoint data not found")
 		return
-	
-	# Load the stage if different
+
 	var checkpoint_stage = checkpoint_info.get("stage_path", "")
-	
 	if current_stage.scene_file_path != checkpoint_stage and not checkpoint_stage.is_empty():
+		print("🌀 Changing stage to checkpoint scene...")
+		change_stage(checkpoint_stage, "")
 		return
-		
-	# Can change stage if different but not implemented yet to test
-	#	change_stage(checkpoint_stage, "")
-	#	# Wait for scene to load
-	#	await get_tree().process_frame
 
-	if player != null:
-		var player_state: Dictionary = checkpoint_info.get("player_state")
-		if player_state == null:
-			return
-		player.load_state(player_state)
-		print("Player respawned at checkpoint: ", current_checkpoint_id)
+	if player:
+		player.load_state(checkpoint_info.get("player_state", {}))
+		player.health = checkpoint_info.get("health", player.max_health)
+		player.has_blade = checkpoint_info.get("has_blade", false)
+
+		if player.has_blade:
+			player.collected_blade()
+
+		print("✅ Player respawned at checkpoint:", current_checkpoint_id)
 	else:
-		print("Player not found for respawn")
+		print("⚠️ Player not found for respawn")
 
-#check if there is a checkpoint
+
 func has_checkpoint() -> bool:
 	return not current_checkpoint_id.is_empty()
 
-# Save checkpoint data to persistent storage
-func save_checkpoint_data() -> void:
-	var save_data = {
-		"current_checkpoint_id": current_checkpoint_id,
-		"checkpoint_data": checkpoint_data
-	}
-	SaveSystem.save_checkpoint_data(save_data)
 
-# Load checkpoint data from persistent storage
+# --- Persistent Save ---
 func load_checkpoint_data() -> void:
 	var save_data = SaveSystem.load_checkpoint_data()
-	if not save_data.is_empty():
-		current_checkpoint_id = save_data.get("current_checkpoint_id", "")
-		checkpoint_data = save_data.get("checkpoint_data", {})
-		print("Checkpoint data loaded from save file")
+	if save_data.is_empty():
+		print("⚠️ No checkpoint file found.")
+		return
 
-# Clear all checkpoint data
+	current_checkpoint_id = save_data.get("checkpoint_id", "")
+	var player_data = save_data.get("player", {})
+	var stage_path = save_data.get("stage_path", "")
+
+	if not current_checkpoint_id.is_empty():
+		checkpoint_data[current_checkpoint_id] = player_data
+
+		if not stage_path.is_empty():
+			print("🗺️ Loading checkpoint scene:", stage_path)
+			change_stage(stage_path)
+		else:
+			print("✅ Checkpoint loaded but no stage path found.")
+	else:
+		print("✅ Checkpoint data loaded, but no active checkpoint.")
+
+
 func clear_checkpoint_data() -> void:
 	current_checkpoint_id = ""
 	checkpoint_data.clear()
 	SaveSystem.delete_save_file()
-	print("All checkpoint data cleared")
+	print("🧹 All checkpoint data cleared.")
 
-# 🗡️ Gọi khi người chơi nhận kiếm từ hội thoại
+
+# --- Nhặt blade ---
 func collect_blade() -> void:
 	if has_blade:
 		print("⚔️ Player already has the blade.")
 		return
-	
+
 	has_blade = true
 	print("⚔️ Player collected the blade!")
 

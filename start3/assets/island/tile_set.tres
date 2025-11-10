@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://bbbkp3mqs7lva"]
+[gd_resource type="TileSet" load_steps=12 format=3 uid="uid://bbbkp3mqs7lva"]
 
 [ext_resource type="Texture2D" uid="uid://v2dtejovry7r" path="res://assets/island/terrain/terrain_32x32.png" id="1_ftyrk"]
 [ext_resource type="PackedScene" uid="uid://bghk1nocyicg" path="res://levels/objects/palm_tree_2.tscn" id="2_71p2d"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bmhud8xs71feb" path="res://levels/objects/palm_tree_1.tscn" id="4_71p2d"]
 [ext_resource type="PackedScene" uid="uid://dyudd4uaoywg6" path="res://scenes/enemies/spike/durian.tscn" id="5_k44kf"]
 [ext_resource type="PackedScene" uid="uid://dubb5b1vjmsxd" path="res://levels/objects/door/door.tscn" id="7_5bcw6"]
+[ext_resource type="Texture2D" uid="uid://0s5f78jq10vn" path="res://assets/GandalfHardcore FREE Platformer Assets/Decor.png" id="8_wuuil"]
 [ext_resource type="PackedScene" uid="uid://cw41ooeg3pxq1" path="res://levels/objects/checkpoint/checkpoint.tscn" id="9_msmts"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o4wpn"]
@@ -397,6 +398,16 @@ scenes/4/scene = ExtResource("5_k44kf")
 scenes/5/scene = ExtResource("7_5bcw6")
 scenes/9/scene = ExtResource("9_msmts")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0mvou"]
+texture = ExtResource("8_wuuil")
+texture_region_size = Vector2i(32, 32)
+0:14/size_in_atlas = Vector2i(2, 1)
+0:14/0 = 0
+0:13/size_in_atlas = Vector2i(2, 1)
+0:13/0 = 0
+3:13/0 = 0
+2:13/0 = 0
+
 [resource]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
@@ -405,3 +416,4 @@ terrain_set_0/terrain_0/name = "Land"
 terrain_set_0/terrain_0/color = Color(0.513185, 0.718457, 0.176095, 1)
 sources/0 = SubResource("TileSetAtlasSource_o4wpn")
 sources/1 = SubResource("TileSetScenesCollectionSource_ux5qc")
+sources/3 = SubResource("TileSetAtlasSource_0mvou")

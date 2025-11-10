@@ -2,7 +2,6 @@ extends PlayerState
 
 func _enter() -> void:
 	obj.change_animation("jump")
-
 func _update(delta: float):
 	if not obj.just_wall_jumped:
 		if control_climbing(delta):

@@ -1,0 +1,83 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5vj4nc8sx7cm"]
+
+[ext_resource type="Script" uid="uid://o7ggfumf34m" path="res://screens/main_menu.gd" id="1_ocono"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ocono"]
+font_size = 28
+font_color = Color(1, 0.580392, 0.407843, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.701961)
+
+[sub_resource type="LabelSettings" id="LabelSettings_p3cyw"]
+font_size = 9
+font_color = Color(0.784314, 0.784314, 0.784314, 1)
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_ocono")
+
+[node name="PanelMain" type="Panel" parent="."]
+offset_right = 480.0
+offset_bottom = 270.0
+
+[node name="GameTittle" type="Label" parent="PanelMain"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -119.0
+offset_top = 45.0
+offset_right = 119.0
+offset_bottom = 88.0
+grow_horizontal = 2
+text = "Foxy Battle Arena"
+label_settings = SubResource("LabelSettings_ocono")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonFindMatch" type="Button" parent="PanelMain"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = 36.0
+offset_right = 87.0
+offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Find Match"
+
+[node name="WelcomeText" type="Label" parent="PanelMain"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -102.5
+offset_top = -49.0
+offset_right = 102.5
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Welcome ..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SessionKey" type="Label" parent="PanelMain"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -25.0
+offset_right = 137.0
+offset_bottom = -2.0
+grow_vertical = 0
+text = "12345678"
+label_settings = SubResource("LabelSettings_p3cyw")
+vertical_alignment = 2
+
+[connection signal="pressed" from="PanelMain/ButtonFindMatch" to="." method="_on_button_find_match_pressed"]

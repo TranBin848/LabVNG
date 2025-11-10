@@ -4,6 +4,7 @@ extends FSMState
 var cling_cooldown = 0.1
 var cling_timer = 0.0
 
+
 #Control moving and changing state to run
 #Return true if moving
 func control_moving() -> bool:

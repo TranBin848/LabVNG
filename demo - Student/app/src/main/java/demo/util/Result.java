@@ -1,0 +1,19 @@
+package demo.util;
+
+public enum Result {
+    SUCCESS,
+    EXCEPTION,
+    MISSING_SESSION,
+    INVALID_SESSION,
+    INVALID_COMMAND,
+    INVALID_USER_ID,
+    INVALID_NAME,
+    INVALID_LEVEL,
+    INVALID_GOLD,
+    INVALID_TIME,
+    NOT_LOGIN_YET,
+    KICK_BY_NEW_SESSION,
+    ALREADY_JOIN,
+    NOT_JOIN_YET,
+    MISSING_DATA,
+}

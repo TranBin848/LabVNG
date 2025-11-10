@@ -26,13 +26,16 @@ func open_door_and_transition() -> void:
 		await fade_layer.fade_out()
 
 	# 🔹 3. Xử lý dịch chuyển hoặc đổi scene
-	if GameManager.current_stage.scene_file_path == target_stage:
+	var stage_path_real = ProjectSettings.globalize_path(target_stage)
+	stage_path_real = ProjectSettings.localize_path(stage_path_real)
+	print(GameManager.current_stage.scene_file_path)
+	print(stage_path_real)
+	if GameManager.current_stage.scene_file_path == stage_path_real:
 		# Nếu cùng stage → chỉ di chuyển player
 		var door_node = GameManager.current_stage.find_child(target_door)
 		if door_node and GameManager.player:
 			GameManager.player.global_position = door_node.global_position
 	else:
-		# Khác stage → đổi scene qua GameManager
 		GameManager.change_stage(target_stage, target_door)
 
 	# 🔹 4. Fade sáng lại

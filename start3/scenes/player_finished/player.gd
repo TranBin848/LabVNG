@@ -10,8 +10,10 @@ var invul_timer: float = 0.0
 @export var knife_speed: float = 300
 @onready var knife_factory := $Direction/KnifeFactory
 
+
 func _ready() -> void:
 	super._ready()
+	extra_sprites.append($Direction/SilhouetteSprite2D)
 	fsm = FSM.new(self, $States, $States/Idle)
 	if has_blade:
 		collected_blade()
@@ -46,7 +48,9 @@ func _on_hurt_area_2d_hurt(_direction: Variant, _damage: Variant) -> void:
 
 func save_state() -> Dictionary:
 	return {
-		"position": [global_position.x, global_position.y]
+		"position": [global_position.x, global_position.y],
+		"health": health,
+		"has_blade": has_blade
 	}
 
 func load_state(data: Dictionary) -> void:
@@ -54,3 +58,11 @@ func load_state(data: Dictionary) -> void:
 	if data.has("position"):
 		var pos_array = data["position"]
 		global_position = Vector2(pos_array[0], pos_array[1])
+	
+	if data.has("health"):
+		health = clamp(data["health"], 0, max_health)
+	
+	if data.has("has_blade"):
+		has_blade = data["has_blade"]
+		if has_blade:
+			collected_blade() 

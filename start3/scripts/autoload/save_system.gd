@@ -3,54 +3,57 @@ extends Node
 ## Save system for persistent checkpoint data
 const SAVE_FILE: String = "user://checkpoint_save.dat"
 
-# Save checkpoint data to file
-func save_checkpoint_data(data: Dictionary) -> void:
-	var file: FileAccess = FileAccess.open(SAVE_FILE, FileAccess.WRITE)
+# 🔹 Lưu dữ liệu checkpoint: gồm player, checkpoint_id, stage_path
+func save_checkpoint_data(checkpoint_id: String, player_data: Dictionary, stage_path: String) -> void:
+	print(player_data)
+	var save_data := {
+		"checkpoint_id": checkpoint_id,
+		"player": player_data,
+		"stage_path": stage_path
+	}
+
+	var file := FileAccess.open(SAVE_FILE, FileAccess.WRITE)
 	if file == null:
-		push_error("Failed to open save file for writing")
+		push_error("❌ Không mở được file save để ghi.")
 		return
-	
-	# Convert Dictionary thành JSON và lưu
-	var json_string: String = JSON.stringify(data)
-	file.store_line(json_string)
+
+	file.store_line(JSON.stringify(save_data))
 	file.close()
-	print("✅ Checkpoint data saved to file:", SAVE_FILE)
+	print("✅ Đã lưu checkpoint:", checkpoint_id, "ở stage:", stage_path)
 
 
-# Load checkpoint data from file
+# 🔹 Load checkpoint data từ file
 func load_checkpoint_data() -> Dictionary:
 	if not has_save_file():
-		print("⚠️ No save file found, starting fresh")
+		print("⚠️ Không tìm thấy file save, bắt đầu mới.")
 		return {}
-	
-	var file: FileAccess = FileAccess.open(SAVE_FILE, FileAccess.READ)
+
+	var file := FileAccess.open(SAVE_FILE, FileAccess.READ)
 	if file == null:
-		push_error("Failed to open save file for reading")
+		push_error("❌ Không thể mở file save để đọc.")
 		return {}
-	
-	var json_string: String = file.get_as_text()
+
+	var result: Variant = JSON.parse_string(file.get_as_text())
 	file.close()
-	
-	var result: Variant = JSON.parse_string(json_string)
+
 	if typeof(result) == TYPE_DICTIONARY:
-		print("✅ Checkpoint data loaded from file")
+		print("✅ Đã load dữ liệu checkpoint.")
 		return result
 	else:
-		push_error("Failed to parse checkpoint data (invalid JSON)")
+		push_error("❌ Dữ liệu checkpoint không hợp lệ.")
 		return {}
 
 
-# Check if save file exists
+# 🔹 Kiểm tra tồn tại file save
 func has_save_file() -> bool:
 	return FileAccess.file_exists(SAVE_FILE)
 
 
-# Delete save file
+# 🔹 Xóa file save
 func delete_save_file() -> void:
 	if has_save_file():
-		# Dùng DirAccess.remove_absolute để tránh lỗi kiểu Variant
-		var error: Error = DirAccess.remove_absolute(SAVE_FILE)
-		if error == OK:
-			print("🗑️ Save file deleted")
+		var err := DirAccess.remove_absolute(SAVE_FILE)
+		if err == OK:
+			print("🗑️ Đã xóa file save.")
 		else:
-			push_error("Failed to delete save file (Error code: %s)" % str(error))
+			push_error("❌ Xóa file save thất bại: %s" % str(err))

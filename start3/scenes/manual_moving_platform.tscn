@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bue2ipqykcctm"]
 
 [ext_resource type="Texture2D" uid="uid://bn23ps3jhu4ru" path="res://assets/island/objects/moving_platform/moving_platform.png" id="1_2kswd"]
-[ext_resource type="Script" uid="uid://cxhfussfscic" path="res://scenes/auto_moving_platform.gd" id="1_t1tmw"]
+[ext_resource type="Script" uid="uid://dfi0o4l1bb0ur" path="res://scenes/manual_moving_platform.gd" id="1_t1tmw"]
 [ext_resource type="Script" uid="uid://nvuabioddqmj" path="res://scripts/interactive_area_2d.gd" id="3_t1tmw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7w38m"]

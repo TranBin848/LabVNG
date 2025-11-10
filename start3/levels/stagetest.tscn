@@ -1,0 +1,101 @@
+[gd_scene load_steps=14 format=4 uid="uid://chsrcurebyqgf"]
+
+[ext_resource type="TileSet" uid="uid://bbbkp3mqs7lva" path="res://assets/island/tile_set.tres" id="1_h513n"]
+[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player_finished/player.tscn" id="2_lij4n"]
+[ext_resource type="Texture2D" uid="uid://byhab28nvovyf" path="res://assets/GandalfHardcore FREE Platformer Assets/GandalfHardcore Background layers/Autumn BG/GandalfHardcore Background layers_layer 5.png" id="3_s4kl8"]
+[ext_resource type="Texture2D" uid="uid://dt6xhqnv01x7u" path="res://assets/GandalfHardcore FREE Platformer Assets/GandalfHardcore Background layers/Autumn BG/GandalfHardcore Background layers_layer 4.png" id="4_tmkck"]
+[ext_resource type="Texture2D" uid="uid://bqihvseib7snt" path="res://assets/GandalfHardcore FREE Platformer Assets/GandalfHardcore Background layers/Autumn BG/GandalfHardcore Background layers_layer 3.png" id="5_jwjjh"]
+[ext_resource type="Texture2D" uid="uid://c7nt6w2kgxtcl" path="res://assets/GandalfHardcore FREE Platformer Assets/GandalfHardcore Background layers/Autumn BG/GandalfHardcore Background layers_layer 2.png" id="6_8k3w2"]
+[ext_resource type="Texture2D" uid="uid://dksi45f7agqp8" path="res://assets/GandalfHardcore FREE Platformer Assets/GandalfHardcore Background layers/Autumn BG/GandalfHardcore Background layers_layer 1.png" id="7_isyvh"]
+[ext_resource type="Script" uid="uid://vv6u1rhy1wgq" path="res://levels/parallax/parallax_layer_small_cloud.gd" id="8_ycsva"]
+[ext_resource type="Texture2D" uid="uid://ci5tpl05cnmra" path="res://assets/island/background/small_cloud_1.png" id="9_rsv73"]
+[ext_resource type="Texture2D" uid="uid://1t3pkyls8wyt" path="res://assets/island/background/small_cloud_2.png" id="10_ggh6x"]
+[ext_resource type="Texture2D" uid="uid://dcvs45slp2tv3" path="res://assets/island/background/small_cloud_3.png" id="11_l0vxu"]
+[ext_resource type="Texture2D" uid="uid://dky4t4niqpgch" path="res://assets/GandalfHardcore FREE Platformer Assets/Weeping Willow1.png" id="15_q4xm0"]
+[ext_resource type="Texture2D" uid="uid://c6wk4a4div31o" path="res://assets/GandalfHardcore FREE Platformer Assets/Tree1.png" id="16_2ifom"]
+
+[node name="Stage" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAhAA0AAAACAAIAAAAgAA0AAAABAAIAAAAfAA0AAAABAAIAAAAeAA0AAAABAAIAAAAdAA0AAAABAAIAAAAcAA0AAAABAAIAAAAbAA0AAAABAAIAAAAaAA0AAAABAAIAAAAZAA0AAAABAAIAAAAYAA0AAAABAAIAAAAXAA0AAAABAAIAAAAWAA0AAAABAAIAAAAVAA0AAAABAAIAAAAUAA0AAAABAAIAAAATAA0AAAABAAIAAAASAA0AAAABAAIAAAARAA0AAAABAAIAAAAQAA0AAAABAAIAAAAPAA0AAAABAAIAAAAOAA0AAAABAAIAAAANAA0AAAABAAIAAAAMAA0AAAABAAIAAAALAA0AAAABAAIAAAAKAA0AAAABAAIAAAAJAA0AAAABAAIAAAAIAA0AAAABAAIAAAAHAA0AAAABAAIAAAAGAA0AAAABAAIAAAAFAA0AAAABAAIAAAAEAA0AAAABAAIAAAADAA0AAAABAAIAAAACAA0AAAABAAIAAAABAA0AAAABAAIAAAAAAA0AAAABAAIAAAAAAAkAAAABAAAAAAABAAkAAAABAAAAAAACAAkAAAABAAAAAAADAAkAAAABAAAAAAAEAAkAAAABAAAAAAAFAAkAAAABAAAAAAAGAAkAAAABAAAAAAAHAAkAAAABAAAAAAAIAAkAAAABAAAAAAAJAAkAAAABAAAAAAAKAAkAAAABAAAAAAALAAkAAAABAAAAAAAMAAkAAAABAAAAAAANAAkAAAABAAAAAAAOAAkAAAABAAAAAAAPAAkAAAABAAAAAAAQAAkAAAABAAAAAAARAAkAAAABAAAAAAASAAkAAAABAAAAAAATAAkAAAABAAAAAAAUAAkAAAABAAAAAAAVAAkAAAABAAAAAAAWAAkAAAABAAAAAAAXAAkAAAABAAAAAAAYAAkAAAABAAAAAAAZAAkAAAABAAAAAAAaAAkAAAABAAAAAAAbAAkAAAABAAAAAAAcAAkAAAABAAAAAAAdAAkAAAABAAAAAAAeAAkAAAABAAAAAAAfAAkAAAABAAAAAAAAAAoAAAABAAEAAAAAAAsAAAABAAEAAAAAAAwAAAABAAEAAAADAAwAAAABAAEAAAACAAwAAAABAAEAAAACAAsAAAABAAEAAAACAAoAAAABAAEAAAABAAoAAAABAAEAAAABAAsAAAABAAEAAAABAAwAAAABAAEAAAADAAoAAAABAAEAAAADAAsAAAABAAEAAAAEAAoAAAABAAEAAAAFAAoAAAABAAEAAAAGAAoAAAABAAEAAAAHAAoAAAABAAEAAAAIAAoAAAABAAEAAAAFAAsAAAABAAEAAAAEAAsAAAABAAEAAAAEAAwAAAABAAEAAAAFAAwAAAABAAEAAAAGAAwAAAABAAEAAAAHAAwAAAABAAEAAAAGAAsAAAABAAEAAAAHAAsAAAABAAEAAAAIAAsAAAABAAEAAAAJAAsAAAABAAEAAAAKAAsAAAABAAEAAAALAAsAAAABAAEAAAAMAAsAAAABAAEAAAANAAsAAAABAAEAAAAOAAsAAAABAAEAAAAPAAsAAAABAAEAAAAIAAwAAAABAAEAAAAJAAwAAAABAAEAAAAKAAwAAAABAAEAAAALAAwAAAABAAEAAAAMAAwAAAABAAEAAAANAAwAAAABAAEAAAAOAAwAAAABAAEAAAAPAAwAAAABAAEAAAAQAAwAAAABAAEAAAAQAAsAAAABAAEAAAARAAsAAAABAAEAAAAMAAoAAAABAAEAAAALAAoAAAABAAEAAAAKAAoAAAABAAEAAAAJAAoAAAABAAEAAAANAAoAAAABAAEAAAAOAAoAAAABAAEAAAARAAoAAAABAAEAAAAQAAoAAAABAAEAAAAPAAoAAAABAAEAAAATAAoAAAABAAEAAAASAAoAAAABAAEAAAAUAAoAAAABAAEAAAAVAAsAAAABAAEAAAAUAAsAAAABAAEAAAATAAsAAAABAAEAAAASAAsAAAABAAEAAAAXAAsAAAABAAEAAAAWAAsAAAABAAEAAAAYAAsAAAABAAEAAAAZAAwAAAABAAEAAAAaAAwAAAABAAEAAAAbAAwAAAABAAEAAAAbAAsAAAABAAEAAAAaAAsAAAABAAEAAAAZAAsAAAABAAEAAAARAAwAAAABAAEAAAASAAwAAAABAAEAAAATAAwAAAABAAEAAAAVAAwAAAABAAEAAAAUAAwAAAABAAEAAAAWAAwAAAABAAEAAAAXAAwAAAABAAEAAAAYAAwAAAABAAEAAAAcAAwAAAABAAEAAAAdAAwAAAABAAEAAAAcAAsAAAABAAEAAAAYAAoAAAABAAEAAAAXAAoAAAABAAEAAAAVAAoAAAABAAEAAAAWAAoAAAABAAEAAAAZAAoAAAABAAEAAAAaAAoAAAABAAEAAAAbAAoAAAABAAEAAAAcAAoAAAABAAEAAAAdAAoAAAABAAEAAAAeAAoAAAABAAEAAAAfAAsAAAABAAEAAAAgAAsAAAABAAEAAAAfAAoAAAABAAEAAAAdAAsAAAABAAEAAAAeAAsAAAABAAEAAAAeAAwAAAABAAEAAAAfAAwAAAABAAEAAAAgAAwAAAABAAEAAAAhAAsAAAACAAEAAAAgAAoAAAABAAEAAAAhAAoAAAACAAEAAAAhAAkAAAAHAAQAAAAgAAkAAAABAAAAAAAhAAgAAAAEAAEAAAAhAAcAAAAEAAEAAAAhAAwAAAACAAEAAAAhAAYAAAAEAAEAAAAhAAUAAAAEAAEAAAAhAAQAAAAEAAAAAAD//wUAAAAEAAAAAAD//wYAAAAEAAEAAAD//wcAAAAEAAEAAAD//wgAAAAEAAEAAAD//wkAAAAGAAQAAAD//woAAAAAAAEAAAD//wsAAAAAAAEAAAD//wwAAAAAAAEAAAD//w0AAAAAAAIAAAAHAAgAAwADAA0AAAAIAAgAAwADAA0AAAAKAAgAAwADAA0AAAAJAAgAAwADAA0AAAALAAgAAwADAA0AAAAPAAgAAwADAA0AAAAQAAgAAwADAA0AAAARAAgAAwADAA0AAAATAAgAAwADAA0AAAAUAAgAAwADAA0AAAASAAgAAwADAA0AAAAOAAgAAwADAA0AAAANAAgAAwADAA0AAAA=")
+tile_set = ExtResource("1_h513n")
+
+[node name="Front" type="TileMapLayer" parent="."]
+z_index = 1
+tile_map_data = PackedByteArray("AAAVAAgAAwAAAA0AAAAUAAgAAwACAA0AAAATAAgAAwAAAA0AAAAPAAgAAwAAAA0AAAAKAAgAAwAAAA0AAAALAAgAAwACAA0AAAA=")
+tile_set = ExtResource("1_h513n")
+
+[node name="Player" parent="." instance=ExtResource("2_lij4n")]
+position = Vector2(223, 281)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+process_mode = 3
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(148, 196)
+motion_scale = Vector2(0.001, 0.8)
+motion_mirroring = Vector2(767, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("3_s4kl8")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("4_tmkck")
+
+[node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("5_jwjjh")
+
+[node name="Sprite2D4" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("6_8k3w2")
+
+[node name="Sprite2D5" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("7_isyvh")
+
+[node name="ParallaxLayerSmallCloud" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.001, 0.8)
+motion_mirroring = Vector2(515, 0)
+script = ExtResource("8_ycsva")
+
+[node name="SmallCloud1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerSmallCloud"]
+position = Vector2(0, 76)
+texture = ExtResource("9_rsv73")
+centered = false
+
+[node name="SmallCloud2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerSmallCloud"]
+position = Vector2(282, 110)
+texture = ExtResource("10_ggh6x")
+centered = false
+
+[node name="SmallCloud3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerSmallCloud"]
+position = Vector2(266, 11)
+texture = ExtResource("11_l0vxu")
+centered = false
+
+[node name="SmallCloud4" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerSmallCloud"]
+position = Vector2(0, -157)
+texture = ExtResource("9_rsv73")
+centered = false
+
+[node name="SmallCloud5" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerSmallCloud"]
+position = Vector2(282, -123)
+texture = ExtResource("10_ggh6x")
+centered = false
+
+[node name="SmallCloud6" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerSmallCloud"]
+position = Vector2(266, -222)
+texture = ExtResource("11_l0vxu")
+centered = false
+
+[node name="WeepingWillow1" type="Sprite2D" parent="."]
+position = Vector2(588, 193)
+texture = ExtResource("15_q4xm0")
+
+[node name="Tree1" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(418, 184)
+texture = ExtResource("16_2ifom")
+
+[node name="Tree2" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(283, 184)
+texture = ExtResource("16_2ifom")

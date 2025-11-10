@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1hkg0ajy4xjx"]
+
+[ext_resource type="Script" uid="uid://1x1l5alto5rw" path="res://screens/login_menu.gd" id="1_ygqjj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dthe0"]
+font_size = 28
+font_color = Color(1, 0.580392, 0.407843, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.701961)
+
+[node name="LoginMenu" type="Node2D"]
+script = ExtResource("1_ygqjj")
+
+[node name="PanelMain" type="Panel" parent="."]
+offset_right = 480.0
+offset_bottom = 270.0
+
+[node name="GameTittle" type="Label" parent="PanelMain"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -119.0
+offset_top = 32.0
+offset_right = 119.0
+offset_bottom = 77.0
+grow_horizontal = 2
+text = "Foxy Battle Arena"
+label_settings = SubResource("LabelSettings_dthe0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UserID" type="LineEdit" parent="PanelMain"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.0
+offset_top = -30.5
+offset_right = 69.0
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "UserID"
+max_length = 7
+emoji_menu_enabled = false
+
+[node name="ButtonLogin" type="Button" parent="PanelMain"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.0
+offset_top = 17.5
+offset_right = 69.0
+offset_bottom = 52.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Login"
+
+[connection signal="pressed" from="PanelMain/ButtonLogin" to="." method="_on_button_login_pressed"]

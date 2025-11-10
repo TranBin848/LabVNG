@@ -4,9 +4,9 @@
 
 [sub_resource type="Curve2D" id="Curve2D_1f3o5"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 59, -124, 256, 21.8, -256, -21.8, -55, -26, 0, 0, 0, 0, 46, 120, 0, 0, 0, 0, -153, 188)
+"points": PackedVector2Array(0, 0, 0, 0, 59, -124, 0, 0, 0, 0, -2, 62, 0, 0, 0, 0, -153, 188)
 }
-point_count = 4
+point_count = 3
 
 [sub_resource type="Animation" id="Animation_lg0vp"]
 length = 0.001
@@ -38,7 +38,8 @@ _data = {
 curve = SubResource("Curve2D_1f3o5")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
-position = Vector2(59, -124)
+position = Vector2(17.7828, 1.67872)
+progress = 132.257
 rotates = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]

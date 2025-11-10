@@ -1,0 +1,180 @@
+[gd_scene load_steps=29 format=4 uid="uid://cdf6rgia5ptd5"]
+
+[ext_resource type="TileSet" uid="uid://bbbkp3mqs7lva" path="res://assets/island/tile_set.tres" id="1_eh5c0"]
+[ext_resource type="Texture2D" uid="uid://byhab28nvovyf" path="res://assets/GandalfHardcore FREE Platformer Assets/GandalfHardcore Background layers/Autumn BG/GandalfHardcore Background layers_layer 5.png" id="2_3rsaa"]
+[ext_resource type="Texture2D" uid="uid://dt6xhqnv01x7u" path="res://assets/GandalfHardcore FREE Platformer Assets/GandalfHardcore Background layers/Autumn BG/GandalfHardcore Background layers_layer 4.png" id="3_gff88"]
+[ext_resource type="Texture2D" uid="uid://bqihvseib7snt" path="res://assets/GandalfHardcore FREE Platformer Assets/GandalfHardcore Background layers/Autumn BG/GandalfHardcore Background layers_layer 3.png" id="4_aou2g"]
+[ext_resource type="Texture2D" uid="uid://c7nt6w2kgxtcl" path="res://assets/GandalfHardcore FREE Platformer Assets/GandalfHardcore Background layers/Autumn BG/GandalfHardcore Background layers_layer 2.png" id="5_4se8i"]
+[ext_resource type="Texture2D" uid="uid://dksi45f7agqp8" path="res://assets/GandalfHardcore FREE Platformer Assets/GandalfHardcore Background layers/Autumn BG/GandalfHardcore Background layers_layer 1.png" id="6_5o3am"]
+[ext_resource type="Shader" uid="uid://b6vnyaeuw1hrt" path="res://levels/shaketree.tres" id="15_b6dtp"]
+[ext_resource type="Texture2D" uid="uid://c6wk4a4div31o" path="res://assets/GandalfHardcore FREE Platformer Assets/Tree1.png" id="16_wl4d8"]
+[ext_resource type="Texture2D" uid="uid://cmkdlc5870hev" path="res://assets/ELR_SpringlLeaf.png" id="17_3rsaa"]
+[ext_resource type="Texture2D" uid="uid://dky4t4niqpgch" path="res://assets/GandalfHardcore FREE Platformer Assets/Weeping Willow1.png" id="17_55p0m"]
+[ext_resource type="Script" uid="uid://vv6u1rhy1wgq" path="res://levels/parallax/parallax_layer_small_cloud.gd" id="18_72lbb"]
+[ext_resource type="Texture2D" uid="uid://ci5tpl05cnmra" path="res://assets/island/background/small_cloud_1.png" id="19_24t3t"]
+[ext_resource type="Texture2D" uid="uid://1t3pkyls8wyt" path="res://assets/island/background/small_cloud_2.png" id="20_1e8vn"]
+[ext_resource type="Texture2D" uid="uid://dcvs45slp2tv3" path="res://assets/island/background/small_cloud_3.png" id="21_3uarr"]
+[ext_resource type="Script" uid="uid://bch27emvjwwy2" path="res://levels/water.gd" id="22_j6jrs"]
+[ext_resource type="Shader" uid="uid://x8ug2vfcahgr" path="res://levels/stage.gdshader" id="22_wl4d8"]
+[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player_finished/player.tscn" id="24_55p0m"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_b6dtp"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3rsaa"]
+noise = SubResource("FastNoiseLite_b6dtp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3rsaa"]
+shader = ExtResource("22_wl4d8")
+shader_parameter/CAST_COLOR = Color(0, 0, 0, 1)
+shader_parameter/fast_noise = SubResource("NoiseTexture2D_3rsaa")
+shader_parameter/speed = Vector2(0.03, 0.07)
+shader_parameter/wave_strength = 1.25
+shader_parameter/scale_y = 450.0
+shader_parameter/y_zoom = 1.4641
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_wl4d8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b6dtp"]
+shader = ExtResource("15_b6dtp")
+shader_parameter/WindStrength = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gff88"]
+shader = ExtResource("15_b6dtp")
+shader_parameter/WindStrength = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aou2g"]
+shader = ExtResource("15_b6dtp")
+shader_parameter/WindStrength = 10.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gff88"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_aou2g"]
+offsets = PackedFloat32Array(0, 0.189474, 0.715789, 1)
+colors = PackedColorArray(0.776471, 0.776471, 0.776471, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4se8i"]
+gradient = SubResource("Gradient_aou2g")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b6dtp"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(500, 200, 1)
+spread = 20.0
+initial_velocity_min = 20.0
+initial_velocity_max = 80.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 50.0
+gravity = Vector3(0, 10, 0)
+scale_min = 0.5
+scale_max = 1.2
+color_ramp = SubResource("GradientTexture1D_4se8i")
+anim_offset_max = 1.0
+
+[node name="Stage" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAhAA0AAAACAAIAAAAgAA0AAAABAAIAAAAfAA0AAAABAAIAAAAeAA0AAAABAAIAAAAdAA0AAAABAAIAAAAcAA0AAAABAAIAAAAbAA0AAAABAAIAAAAaAA0AAAABAAIAAAAZAA0AAAABAAIAAAAYAA0AAAABAAIAAAAXAA0AAAABAAIAAAAWAA0AAAABAAIAAAAVAA0AAAABAAIAAAAUAA0AAAABAAIAAAATAA0AAAABAAIAAAASAA0AAAABAAIAAAARAA0AAAABAAIAAAAQAA0AAAABAAIAAAAPAA0AAAABAAIAAAAOAA0AAAABAAIAAAANAA0AAAABAAIAAAAMAA0AAAABAAIAAAALAA0AAAABAAIAAAAKAA0AAAABAAIAAAAJAA0AAAABAAIAAAAIAA0AAAABAAIAAAAHAA0AAAABAAIAAAAGAA0AAAABAAIAAAAFAA0AAAABAAIAAAAEAA0AAAABAAIAAAADAA0AAAABAAIAAAACAA0AAAABAAIAAAABAA0AAAABAAIAAAAAAA0AAAABAAIAAAAAAAkAAAABAAAAAAABAAkAAAABAAAAAAACAAkAAAABAAAAAAADAAkAAAABAAAAAAAEAAkAAAABAAAAAAAFAAkAAAABAAAAAAAGAAkAAAABAAAAAAAHAAkAAAABAAAAAAAIAAkAAAABAAAAAAAJAAkAAAABAAAAAAAKAAkAAAABAAAAAAALAAkAAAABAAAAAAAMAAkAAAABAAAAAAANAAkAAAABAAAAAAAOAAkAAAABAAAAAAAPAAkAAAABAAAAAAAQAAkAAAABAAAAAAARAAkAAAABAAAAAAASAAkAAAABAAAAAAATAAkAAAABAAAAAAAUAAkAAAABAAAAAAAVAAkAAAABAAAAAAAWAAkAAAABAAAAAAAXAAkAAAABAAAAAAAYAAkAAAABAAAAAAAZAAkAAAABAAAAAAAaAAkAAAABAAAAAAAbAAkAAAABAAAAAAAcAAkAAAABAAAAAAAdAAkAAAABAAAAAAAeAAkAAAABAAAAAAAfAAkAAAABAAAAAAAAAAoAAAABAAEAAAAAAAsAAAABAAEAAAAAAAwAAAABAAEAAAADAAwAAAABAAEAAAACAAwAAAABAAEAAAACAAsAAAABAAEAAAACAAoAAAABAAEAAAABAAoAAAABAAEAAAABAAsAAAABAAEAAAABAAwAAAABAAEAAAADAAoAAAABAAEAAAADAAsAAAABAAEAAAAEAAoAAAABAAEAAAAFAAoAAAABAAEAAAAGAAoAAAABAAEAAAAHAAoAAAABAAEAAAAIAAoAAAABAAEAAAAFAAsAAAABAAEAAAAEAAsAAAABAAEAAAAEAAwAAAABAAEAAAAFAAwAAAABAAEAAAAGAAwAAAABAAEAAAAHAAwAAAABAAEAAAAGAAsAAAABAAEAAAAHAAsAAAABAAEAAAAIAAsAAAABAAEAAAAJAAsAAAABAAEAAAAKAAsAAAABAAEAAAALAAsAAAABAAEAAAAMAAsAAAABAAEAAAANAAsAAAABAAEAAAAOAAsAAAABAAEAAAAPAAsAAAABAAEAAAAIAAwAAAABAAEAAAAJAAwAAAABAAEAAAAKAAwAAAABAAEAAAALAAwAAAABAAEAAAAMAAwAAAABAAEAAAANAAwAAAABAAEAAAAOAAwAAAABAAEAAAAPAAwAAAABAAEAAAAQAAwAAAABAAEAAAAQAAsAAAABAAEAAAARAAsAAAABAAEAAAAMAAoAAAABAAEAAAALAAoAAAABAAEAAAAKAAoAAAABAAEAAAAJAAoAAAABAAEAAAANAAoAAAABAAEAAAAOAAoAAAABAAEAAAARAAoAAAABAAEAAAAQAAoAAAABAAEAAAAPAAoAAAABAAEAAAATAAoAAAABAAEAAAASAAoAAAABAAEAAAAUAAoAAAABAAEAAAAVAAsAAAABAAEAAAAUAAsAAAABAAEAAAATAAsAAAABAAEAAAASAAsAAAABAAEAAAAXAAsAAAABAAEAAAAWAAsAAAABAAEAAAAYAAsAAAABAAEAAAAZAAwAAAABAAEAAAAaAAwAAAABAAEAAAAbAAwAAAABAAEAAAAbAAsAAAABAAEAAAAaAAsAAAABAAEAAAAZAAsAAAABAAEAAAARAAwAAAABAAEAAAASAAwAAAABAAEAAAATAAwAAAABAAEAAAAVAAwAAAABAAEAAAAUAAwAAAABAAEAAAAWAAwAAAABAAEAAAAXAAwAAAABAAEAAAAYAAwAAAABAAEAAAAcAAwAAAABAAEAAAAdAAwAAAABAAEAAAAcAAsAAAABAAEAAAAYAAoAAAABAAEAAAAXAAoAAAABAAEAAAAVAAoAAAABAAEAAAAWAAoAAAABAAEAAAAZAAoAAAABAAEAAAAaAAoAAAABAAEAAAAbAAoAAAABAAEAAAAcAAoAAAABAAEAAAAdAAoAAAABAAEAAAAeAAoAAAABAAEAAAAfAAsAAAABAAEAAAAgAAsAAAABAAEAAAAfAAoAAAABAAEAAAAdAAsAAAABAAEAAAAeAAsAAAABAAEAAAAeAAwAAAABAAEAAAAfAAwAAAABAAEAAAAgAAwAAAABAAEAAAAhAAsAAAACAAEAAAAgAAoAAAABAAEAAAAhAAoAAAACAAEAAAAhAAkAAAAHAAQAAAAgAAkAAAABAAAAAAAhAAgAAAAEAAEAAAAhAAcAAAAEAAEAAAAhAAwAAAACAAEAAAAhAAYAAAAEAAEAAAAhAAUAAAAEAAEAAAAhAAQAAAAEAAAAAAD//wUAAAAEAAAAAAD//wYAAAAEAAEAAAD//wcAAAAEAAEAAAD//wgAAAAEAAEAAAD//wkAAAAGAAQAAAD//woAAAAAAAEAAAD//wsAAAAAAAEAAAD//wwAAAAAAAEAAAD//w0AAAAAAAIAAAAHAAgAAwADAA0AAAAIAAgAAwADAA0AAAAKAAgAAwADAA0AAAAJAAgAAwADAA0AAAALAAgAAwADAA0AAAAPAAgAAwADAA0AAAAQAAgAAwADAA0AAAARAAgAAwADAA0AAAATAAgAAwADAA0AAAAUAAgAAwADAA0AAAASAAgAAwADAA0AAAAOAAgAAwADAA0AAAANAAgAAwADAA0AAAA=")
+tile_set = ExtResource("1_eh5c0")
+
+[node name="Player" parent="." instance=ExtResource("24_55p0m")]
+position = Vector2(223, 281)
+
+[node name="Front" type="TileMapLayer" parent="."]
+z_index = 1
+tile_map_data = PackedByteArray("AAAVAAgAAwAAAA0AAAAUAAgAAwACAA0AAAATAAgAAwAAAA0AAAAPAAgAAwAAAA0AAAAKAAgAAwAAAA0AAAALAAgAAwACAA0AAAA=")
+tile_set = ExtResource("1_eh5c0")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+process_mode = 3
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(148, 196)
+motion_scale = Vector2(0.001, 0.8)
+motion_mirroring = Vector2(767, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("2_3rsaa")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("3_gff88")
+
+[node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("4_aou2g")
+
+[node name="Sprite2D4" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("5_4se8i")
+
+[node name="Sprite2D5" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("6_5o3am")
+
+[node name="ParallaxLayerSmallCloud" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.001, 0.8)
+motion_mirroring = Vector2(515, 0)
+script = ExtResource("18_72lbb")
+
+[node name="SmallCloud1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerSmallCloud"]
+position = Vector2(0, 76)
+texture = ExtResource("19_24t3t")
+centered = false
+
+[node name="SmallCloud2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerSmallCloud"]
+position = Vector2(282, 110)
+texture = ExtResource("20_1e8vn")
+centered = false
+
+[node name="SmallCloud3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerSmallCloud"]
+position = Vector2(266, 11)
+texture = ExtResource("21_3uarr")
+centered = false
+
+[node name="SmallCloud4" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerSmallCloud"]
+position = Vector2(0, -157)
+texture = ExtResource("19_24t3t")
+centered = false
+
+[node name="SmallCloud5" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerSmallCloud"]
+position = Vector2(282, -123)
+texture = ExtResource("20_1e8vn")
+centered = false
+
+[node name="SmallCloud6" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerSmallCloud"]
+position = Vector2(266, -222)
+texture = ExtResource("21_3uarr")
+centered = false
+
+[node name="Water" type="Sprite2D" parent="."]
+z_index = 2
+material = SubResource("ShaderMaterial_3rsaa")
+position = Vector2(529, 421)
+scale = Vector2(1121, 233.5)
+texture = SubResource("CanvasTexture_wl4d8")
+script = ExtResource("22_j6jrs")
+
+[node name="WeepingWillow1" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_b6dtp")
+position = Vector2(588, 193)
+texture = ExtResource("17_55p0m")
+
+[node name="Tree1" type="Sprite2D" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_gff88")
+position = Vector2(418, 184)
+texture = ExtResource("16_wl4d8")
+
+[node name="Tree2" type="Sprite2D" parent="."]
+z_index = 1
+material = SubResource("ShaderMaterial_aou2g")
+position = Vector2(283, 184)
+texture = ExtResource("16_wl4d8")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_gff88")
+position = Vector2(509, 139)
+amount = 100
+texture = ExtResource("17_3rsaa")
+visibility_rect = Rect2(-500, -200, 1000, 400)
+process_material = SubResource("ParticleProcessMaterial_b6dtp")

@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://dtka43sxf26om"]
+
+[ext_resource type="Script" uid="uid://nvuabioddqmj" path="res://scripts/interactive_area_2d.gd" id="1_hjlo1"]
+[ext_resource type="Script" uid="uid://0uhkcch4so6s" path="res://scenes/npcs/red_mushroom.gd" id="1_ijk7f"]
+[ext_resource type="Texture2D" uid="uid://3618lytb7nnv" path="res://assets/monsters/mushroom/mushroom_01.png" id="2_ijk7f"]
+[ext_resource type="Texture2D" uid="uid://bqgmklofxv0qi" path="res://assets/monsters/mushroom/mushroom_02.png" id="3_ujh4y"]
+[ext_resource type="Texture2D" uid="uid://cghgcxg1pvwd6" path="res://assets/monsters/mushroom/mushroom_03.png" id="4_0g7q3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_80kq2"]
+size = Vector2(30, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2k2xe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ijk7f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ujh4y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0g7q3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_o7alk"]
+script/source = "extends AnimatedSprite2D
+
+func _ready() -> void:
+	play(\"idle\")
+"
+
+[node name="RedMushroom" type="Node2D"]
+modulate = Color(0.777919, 0.0512545, 0.349531, 1)
+script = ExtResource("1_ijk7f")
+
+[node name="InteractiveArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_hjlo1")
+metadata/_custom_type_script = "uid://nvuabioddqmj"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea2D"]
+position = Vector2(5, -10)
+shape = SubResource("RectangleShape2D_80kq2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="InteractiveArea2D/CollisionShape2D"]
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_2k2xe")
+animation = &"idle"
+frame_progress = 0.597652
+script = SubResource("GDScript_o7alk")
+
+[connection signal="interacted" from="InteractiveArea2D" to="." method="_on_interactive_area_2d_interacted"]

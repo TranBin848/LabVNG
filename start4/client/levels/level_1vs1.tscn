@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=4 uid="uid://rhggwusibgte"]
+
+[ext_resource type="TileSet" uid="uid://bmuxyu21ya31y" path="res://assets/tileset.tres" id="1_05a4t"]
+[ext_resource type="Script" uid="uid://bvacjr8otcelb" path="res://levels/level_1_vs_1.gd" id="1_xdkyo"]
+[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://character/player.tscn" id="2_eonc2"]
+[ext_resource type="PackedScene" uid="uid://skcu2vqo8248" path="res://blade/blade.tscn" id="3_fs4dm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xdkyo"]
+bg_color = Color(0, 0, 0, 0.239216)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_xdkyo"]
+font_size = 12
+
+[node name="Level_1vs1" type="Node2D"]
+script = ExtResource("1_xdkyo")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAACAAgAAAAJAAQAAAADAAgAAAABAAQAAAAEAAgAAAABAAQAAAAFAAgAAAABAAQAAAAGAAgAAAABAAQAAAAHAAgAAAABAAQAAAAIAAgAAAABAAQAAAAJAAgAAAABAAQAAAAKAAgAAAABAAQAAAALAAgAAAABAAQAAAAMAAgAAAAKAAQAAAANAAgAAAABAAIAAAAOAAgAAAACAAIAAAAAAAcAAAAAAAEAAAAAAAYAAAAGAAQAAAAAAAUAAAAEAAEAAAAAAAQAAAAEAAEAAAAAAAMAAAAEAAEAAAAAAAIAAAAEAAEAAAAAAAEAAAAEAAEAAAAAAAAAAAAEAAAAAAAOAAAAAAAEAAAAAAAOAAEAAAAEAAEAAAAOAAIAAAAEAAEAAAAOAAMAAAAEAAEAAAAOAAQAAAAEAAEAAAAOAAYAAAANAAQAAAAOAAcAAAACAAEAAAAAAAgAAAAAAAIAAAAMAAcAAAAPAAMAAAAOAAUAAAAEAAEAAAANAAcAAAAHAAEAAAANAAYAAAAPAAMAAAABAAcAAAAGAAEAAAABAAYAAAAQAAMAAAACAAcAAAAQAAMAAAADAAUAAAAEAAQAAAALAAUAAAAEAAQAAAAFAAQAAAAAAAQAAAAGAAQAAAABAAQAAAAHAAQAAAABAAQAAAAIAAQAAAABAAQAAAAJAAQAAAACAAQAAAABAAgAAAABAAIAAAA=")
+tile_set = ExtResource("1_05a4t")
+
+[node name="Player1" parent="." instance=ExtResource("2_eonc2")]
+position = Vector2(51, 191)
+has_blade = true
+_Blade = ExtResource("3_fs4dm")
+
+[node name="Player2" parent="." instance=ExtResource("2_eonc2")]
+position = Vector2(429, 189)
+has_blade = true
+_Blade = ExtResource("3_fs4dm")
+direction = -1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Send" type="Button" parent="CanvasLayer"]
+offset_left = 166.0
+offset_top = 5.0
+offset_right = 226.0
+offset_bottom = 36.0
+text = "Send"
+
+[node name="ChatMsg" type="LineEdit" parent="CanvasLayer"]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 161.0
+offset_bottom = 36.0
+placeholder_text = "write a message..."
+max_length = 30
+
+[node name="ChatBox" type="Label" parent="CanvasLayer"]
+offset_left = 5.0
+offset_top = 44.0
+offset_right = 161.0
+offset_bottom = 109.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_xdkyo")
+label_settings = SubResource("LabelSettings_xdkyo")
+
+[connection signal="pressed" from="CanvasLayer/Send" to="." method="_on_send_pressed"]

@@ -1,0 +1,5 @@
+res://screens/connecting_menu.tscn
+res://assets/tileset.tres
+res://screens/login_menu.tscn
+res://screens/main_menu.tscn
+res://levels/level_1vs1.tscn
